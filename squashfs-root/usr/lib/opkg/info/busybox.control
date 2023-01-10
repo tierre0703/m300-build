@@ -1,0 +1,13 @@
+Package: busybox
+Version: 1.26.2-7
+Depends: libc, jsonfilter
+Source: package/utils/busybox
+License: GPL-2.0
+LicenseFiles: LICENSE archival/libarchive/bz/LICENSE
+Section: base
+Essential: yes
+Maintainer: Felix Fietkau <nbd@nbd.name>
+Architecture: x86
+Installed-Size: 245160
+Description:  The Swiss Army Knife of embedded Linux.
+ It slices, it dices, it makes Julian Fries.

@@ -1,0 +1,80 @@
+
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config interface 'lan'
+	option type 'bridge'
+	option proto 'static'
+	option ipaddr '10.10.11.1'
+	option netmask '255.255.0.0'
+	option ip6assign '60'
+	option macaddr '40:a5:ef:ef:9c:35'
+	option ifname 'eth5'
+
+config interface 'wan'
+	option type 'bridge'
+	option ifname 'eth0'
+	option proto 'dhcp'
+	option metric '10'
+	option defmetric '10'
+	option macaddr '40:a5:ef:ef:9c:30'
+
+config interface 'wan6'
+	option ifname 'eth0'
+	option proto 'dhcpv6'
+
+config globals 'globals'
+	option ula_prefix 'fdd4:b49d:f34e::/48'
+
+config def 'def'
+	option def_lan 'eth1 eth2 eth3 eth4 eth5'
+
+config eth0 'def_wan'
+
+config 40:a5:ef:ef:9c:35 'def_lan_macaddr'
+
+config 40:a5:ef:ef:9c:30 'def_wan_macaddr'
+
+config map 'multi_pppoe_list_wan'
+	option list '1,1,'
+
+config interface 'wan1'
+	option ifname 'eth1'
+	option type 'bridge'
+	option proto 'dhcp'
+	option metric '20'
+	option defmetric '20'
+	option macaddr '40:a5:ef:ef:9c:31'
+	option defmacaddr '40:a5:ef:ef:9c:31'
+
+config interface 'wan2'
+	option ifname 'eth2'
+	option type 'bridge'
+	option proto 'dhcp'
+	option metric '30'
+	option defmetric '30'
+	option macaddr '40:a5:ef:ef:9c:32'
+	option defmacaddr '40:a5:ef:ef:9c:32'
+
+config interface 'wan3'
+	option ifname 'eth3'
+	option type 'bridge'
+	option proto 'dhcp'
+	option metric '40'
+	option defmetric '40'
+	option macaddr '40:a5:ef:ef:9c:33'
+	option defmacaddr '40:a5:ef:ef:9c:33'
+
+config interface 'wan4'
+	option ifname 'eth4'
+	option type 'bridge'
+	option proto 'dhcp'
+	option metric '50'
+	option defmetric '50'
+	option macaddr '40:a5:ef:ef:9c:34'
+	option defmacaddr '40:a5:ef:ef:9c:34'
+
+

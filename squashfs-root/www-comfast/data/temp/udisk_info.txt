@@ -1,0 +1,2 @@
+/dev/sda1               513.4G    379.9G    107.9G  78% /mnt/sda1
+/dev/sda1: TYPE="ext2"

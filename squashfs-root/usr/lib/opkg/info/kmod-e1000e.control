@@ -1,0 +1,10 @@
+Package: kmod-e1000e
+Version: 3.18.9-1
+Depends: kernel (=3.18.9-1-573d284c05793ff4fc8174c0c8513209), kmod-ptp
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: x86
+Installed-Size: 182
+Description:  Kernel modules for Intel(R) PRO/1000 PCIe Ethernet adapters.

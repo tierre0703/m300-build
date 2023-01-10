@@ -1,0 +1,8 @@
+Package: kmod-net_stats
+Version: 3.18.9-3
+Depends: kernel (=3.18.9-1-573d284c05793ff4fc8174c0c8513209), kmod-input-core
+Source: package/kernel/net_stats
+Section: kernel
+Architecture: x86
+Installed-Size: 3301
+Description:  Kernel module to do network traffic statistics.

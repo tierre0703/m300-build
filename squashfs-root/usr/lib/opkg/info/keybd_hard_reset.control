@@ -1,0 +1,8 @@
+Package: keybd_hard_reset
+Version: 0.1-1
+Depends: libc, libubox
+Source: package/keybd_hard_reset
+Section: net
+Architecture: x86
+Installed-Size: 2335
+Description:  This package contains IPK auto upgrade

@@ -1,0 +1,10 @@
+Package: gdbserver
+Version: 7.8-1
+Depends: libc, libthread-db, zlib
+Source: package/devel/gdb
+License: GPL-3.0+
+Section: devel
+Architecture: x86
+Installed-Size: 117475
+Description:  GDBSERVER is a program that allows you to run GDB on a different machine than the
+ one which is running the program being debugged.

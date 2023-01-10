@@ -1,0 +1,10 @@
+Package: miniupnpd
+Version: 1.9.20150922-1
+Depends: libc, iptables, libip4tc
+Source: feeds/routing/miniupnpd
+License: BSD-3-Clause
+Section: net
+Maintainer: Markus Stenberg <fingon@iki.fi>
+Architecture: x86
+Installed-Size: 47753
+Description:  Lightweight UPnP IGD, NAT-PMP & PCP daemon

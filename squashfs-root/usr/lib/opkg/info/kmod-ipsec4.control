@@ -1,0 +1,18 @@
+Package: kmod-ipsec4
+Version: 3.18.9-1
+Depends: kernel (=3.18.9-1-573d284c05793ff4fc8174c0c8513209), kmod-ipsec, kmod-iptunnel4
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: x86
+Installed-Size: 10963
+Description:  Kernel modules for IPsec support in IPv4.
+ Includes:
+ - ah4
+ - esp4
+ - ipcomp4
+ - xfrm4_mode_beet
+ - xfrm4_mode_transport
+ - xfrm4_mode_tunnel
+ - xfrm4_tunnel

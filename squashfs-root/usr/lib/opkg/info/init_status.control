@@ -1,0 +1,8 @@
+Package: init_status
+Version: 1-1
+Depends: libc, libuci
+Source: package/init_status
+Section: base
+Architecture: x86
+Installed-Size: 25111
+Description:  This package contains init_status

@@ -1,0 +1,8 @@
+Package: pptpd
+Version: 1.4.0-1
+Depends: libc, kmod-ppp, kmod-gre, kmod-mppe, ppp
+Source: package/pptpd
+Section: net
+Architecture: x86
+Installed-Size: 27582
+Description:  PopTop pptp server

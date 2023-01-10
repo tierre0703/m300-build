@@ -1,0 +1,10 @@
+Package: kmod-8139too
+Version: 3.18.9-1
+Depends: kernel (=3.18.9-1-573d284c05793ff4fc8174c0c8513209), kmod-mii
+Source: package/kernel/linux
+License: GPLv2
+Section: kernel
+Status: unknown hold not-installed
+Architecture: x86
+Installed-Size: 183
+Description:  Kernel modules for RealTek RTL-8139 PCI Fast Ethernet adapters

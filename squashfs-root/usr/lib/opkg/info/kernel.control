@@ -1,0 +1,10 @@
+Package: kernel
+Version: 3.18.9-1-573d284c05793ff4fc8174c0c8513209
+Depends: libc
+Source: package/kernel/linux
+License: GPLv2
+Section: sys
+Status: unknown hold not-installed
+Architecture: x86
+Installed-Size: 105
+Description:  Virtual kernel package

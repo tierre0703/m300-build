@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport"
+          name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title></title>
+    <link type="image/x-icon" href="/images/favicon.ico" rel="shortcut icon"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/fonts/allfonts.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/ora.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/theme.css"/>
+    <!--[if lt IE 9]>
+    <script src="/common/lib/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .icon_margin {
+            display: none;
+        }
+    </style>
+</head>
+<body module="ac_details" id="mbox_container">
+<div id="theme-wrapper">
+    <!-- header start -->
+    <div class="navbar" id="header-navbar">
+        <div class="container-fluid">
+            <a id="logo" class="navbar-brand">
+                <img src="/images/logo.png" alt="" class="normal-logo logo-white"/>
+            </a>
+            <div class="clearfix">
+                <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-bars"></span>
+                </button>
+                <button class="navbar-toggle mode_set" type="button">
+                    <span class="mode_set_text"></span>
+                </button>
+                <div class="nav-no-collapse navbar-left pull-left hidden">
+                    <ul class="nav navbar-nav pull-left">
+                        <li>
+                            <a class="btn" id="make-small-nav">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-no-collapse pull-right" id="header-nav">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="hidden-xs mode_set">
+                            <a href="#" class="mode_set_text"></a>
+                        </li>
+                        <li class="hidden-xs" id="login_out">
+                            <a href="#">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <div id="page-wrapper" class="container-fluid">
+        <div id="nav-col">
+            <div id="col-left" class="col-left-nano">
+                <div id="col-left-inner" class="col-left-nano-content">
+                    <div class="" style="position: relative;" id="seach_box">
+                        <div class="sidebar-search">
+                            <div class="input-group search-form">
+                                <input type="text" class="form-control" id="search_value">
+                                <span class="seach-icon">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav"></div>
+                </div>
+            </div>
+        </div>
+        <div id="content-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="nav-submenu" class="clearfix">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <ol class="breadcrumb">
+                            <li class="litile">
+                                <span sh_lang="home_web"></span>
+                                <span> > </span>
+                                <span sh_lang="index_ac_control"></span>
+                                <span> > </span>
+                                <span sh_lang="index_ac_ap_details"></span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--left content start-->
+                <div class="col-lg-12">
+                    <div class="main-box clearfix">
+                        <div class="main-box-header clearfix">
+                            <div class="row border-bottom-light">
+                                <div class="col-lg-8 mrg-t-md">
+                                    <h2 class="pull-left" sh_lang="index_ac_ap_details"></h2>
+                                </div>
+                                <div class="col-lg-4 sidebar-search">
+                                    <div class="input-group search-form">
+                                        <div class="col-lg-6 form-left text-right">
+                                            <h5>Mac/IP Filter: </h5>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="seach_device_mac">
+                                            <span class="seach-icon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mrg-t-lg">
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="col-lg-4 text-left">
+                                    <button sh_lang="aps_only" class="btn btn-primary mrg-l-lg bm_btn padding-r-lg padding-l-lg btn_lg" href="#settingbox_24g" role="presentation" data-toggle="tab" aria-controls="setting_24g" aria-expanded="true" et="click tap:changeTab" id="btn_aps_only" />
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <button sh_lang="aps_with_clients"  href="#settingbox_58g" role="presentation"
+                                    class="btn btn-primary  bm_btn padding-r-lg padding-l-lg btn_lg"
+                                    role="tab" data-toggle="tab" aria-controls="setting_58g"  et="click tap:changeTab" id="btn_aps_with_clients" />
+                                </div>
+                                <div class="col-lg-4 text-right">
+                                    <button sh_lang="wifi_clients"  href="#settingbox_adv" role="presentation"
+                                    class="btn btn-primary mrg-r-lg  bm_btn padding-r-lg padding-l-lg btn_lg"
+                                    role="tab" data-toggle="tab" aria-controls="settingbox_adv"  et="click tap:changeTab" id="btn_wifi_clients" />
+                                </div>
+                            </div>
+
+                            <!--
+                                <li href="#settingbox_24g" role="presentation"
+                                    class="btn btn-primary active" role="tab"
+                                    data-toggle="tab"
+                                    aria-controls="setting_24g" aria-expanded="true">
+                                    <a sh_lang="setting_2g4"></a>
+                                </li>
+                                <li href="#settingbox_58g" role="presentation"
+                                    class="btn btn-primary"
+                                    role="tab" data-toggle="tab" aria-controls="setting_58g">
+                                    <a sh_lang="setting_5g8"></a>
+                                </li>
+                                <li href="#settingbox_adv" role="presentation"
+                                    class="btn btn-primary"
+                                    role="tab" data-toggle="tab" aria-controls="settingbox_adv">
+                                    <a sh_lang="index_wl_advanced_set"></a>
+                                </li>
+                            </ul>
+                            -->
+                    </div>
+                        <div class="tab-content mrg-t-lg" id="standard">
+                            <div class="main-box-body">
+                                <div class="table-respon">
+                                    <table class="table" id="perfor_table">
+                                        <thead id="parent_heading">
+                                        <tr>
+                                            <th class="text-center">
+                                                <span sh_lang="global_No"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="alias_mac"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="portfw_ipaddress"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="tcpip_lan_dhcp_client"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="run_time"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="ac_device_model"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="ac_dev_soft_vesion"></span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span sh_lang="current_groupname"></span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="perfor_tbody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--left content end-->
+                </div>
+                <div class="row">
+                    <div id="footer-bar" style="opacity: 1;">
+                        <p id="footer-copyright" class="col-xs-12" sh_lang="copyright"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="set_tips"></div>
+</body>
+</html>
+<script type="text/javascript" src="/common/sea.js"></script>
+<script type="text/javascript">
+    var moduleName = document.body.getAttribute("module");
+    if (moduleName) {
+        seajs.use([moduleName, "touch"], function (page) {
+            page.init();
+        });
+    }
+</script>

@@ -1,0 +1,3 @@
+/etc/rc.d/S99keybd_hard_reset
+/etc/init.d/keybd_hard_reset
+/usr/bin/keybd_hard_reset

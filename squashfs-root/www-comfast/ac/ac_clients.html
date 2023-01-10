@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport"
+          name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title></title>
+    <link type="image/x-icon" href="/images/favicon.ico" rel="shortcut icon"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/fonts/allfonts.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/ora.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/theme.css"/>
+    <!--[if lt IE 9]>
+    <script src="/common/lib/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .icon_margin {
+            display: none;
+        }
+    </style>
+</head>
+<body module="ac_clients" id="mbox_container">
+<div id="theme-wrapper">
+    <!-- header start -->
+    <div class="navbar" id="header-navbar">
+        <div class="container-fluid">
+            <a id="logo" class="navbar-brand">
+                <img src="/images/logo.png" alt="" class="normal-logo logo-white"/>
+            </a>
+            <div class="clearfix">
+                <button class="navbar-toggle" data-target=".navbar-ex1-collapse" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-bars"></span>
+                </button>
+                <button class="navbar-toggle mode_set" type="button">
+                    <span class="mode_set_text"></span>
+                </button>
+                <div class="nav-no-collapse navbar-left pull-left hidden">
+                    <ul class="nav navbar-nav pull-left">
+                        <li>
+                            <a class="btn" id="make-small-nav">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-no-collapse pull-right" id="header-nav">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="hidden-xs mode_set">
+                            <a href="#" class="mode_set_text"></a>
+                        </li>
+                        <li class="hidden-xs" id="login_out">
+                            <a href="#">
+                                <i class="fa fa-power-off"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <div id="page-wrapper" class="container-fluid">
+        <div id="nav-col">
+            <div id="col-left" class="col-left-nano">
+                <div id="col-left-inner" class="col-left-nano-content">
+                    <div class="" style="position: relative;" id="seach_box">
+                        <div class="sidebar-search">
+                            <div class="input-group search-form">
+                                <input type="text" class="form-control" id="search_value">
+                                <span class="seach-icon">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav"></div>
+                </div>
+            </div>
+        </div>
+        <div id="content-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="nav-submenu" class="clearfix">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <ol class="breadcrumb">
+                            <li class="litile">
+                                <span sh_lang="home_web"></span>
+                                <span> > </span>
+                                <span sh_lang="index_ac_control"></span>
+                                <span> > </span>
+                                <span sh_lang="index_ac_ap_details"></span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--left content start-->
+                <div class="col-lg-12">
+                    <div class="main-box clearfix">
+                        <div class="main-box-header clearfix">
+                            <div class="row border-bottom-light">
+                                <div class="col-lg-8 mrg-t-md">
+                                    <h2 class="pull-left" sh_lang="index_ac_ap_details"></h2>
+                                </div>
+                                <div class="pull-left col-lg-4 sidebar-search">
+                                    <div class="input-group search-form" style="position:relative;">
+                                        
+                                        <div class="pull-right dropdown" data-control="checkbox-dropdown">
+                                            <label class="dropdown-label"></label>
+                                             <div class="dropdown-list">
+                                                 <a href="#" data-toggle="check-all" class="dropdown-option" data-value="0" et="click tap:changeDropdownListAll">
+                                                   Check All  
+                                                 </a>
+                                                 
+                                                 <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_TerminalMac" data-value="0" et="change:changeDropdownList" />
+                                                    Terminal MAC
+                                                  </label>                                                 
+                                                 <label class="dropdown-option">
+                                                   <input type="checkbox" name="dropdown-group" value="tbl_TerminalIp" data-value="0" et="change:changeDropdownList" />
+                                                   Terminal IP
+                                                 </label>
+                                                    <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_OS" data-value="0" et="change:changeDropdownList" />
+                                                    Vendor
+                                                  </label>
+                                                  <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_DeviceName" data-value="0" et="change:changeDropdownList" />
+                                                    Host Name
+                                                  </label>
+                                                  <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_HostName" data-value="0"  et="change:changeDropdownList"/>
+                                                    AP Name
+                                                  </label>
+  
+                                                 <label class="dropdown-option">
+                                                     <input type="checkbox" name="dropdown-group" value="tbl_SSID" data-value="0" et="change:changeDropdownList" />
+                                                     SSID
+                                                 </label>      
+                                                 <label class="dropdown-option">
+                                                     <input type="checkbox" name="dropdown-group" value="tbl_Type" data-value="0" et="change:changeDropdownList" />
+                                                     Type
+                                                 </label>      
+                                                 <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_Channel" data-value="0" et="change:changeDropdownList" />
+                                                    Channel
+                                                </label>      
+                                                <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_Vlan" data-value="0" et="change:changeDropdownList" />
+                                                    VLAN
+                                                </label>      
+                                                <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_Radio" data-value="0" et="change:changeDropdownList" />
+                                                    Radio
+                                                </label>    
+                                                 <label class="dropdown-option">
+                                                     <input type="checkbox" name="dropdown-group" value="tbl_Signal" data-value="0" et="change:changeDropdownList" />
+                                                     Signal
+                                                 </label>      
+                                                 <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_SNR" data-value="0" et="change:changeDropdownList" />
+                                                    SNR
+                                                </label>      
+                                                <label class="dropdown-option">
+                                                     <input type="checkbox" name="dropdown-group" value="tbl_LinkTime" data-value="0" et="change:changeDropdownList"/>
+                                                     Link Time
+                                                 </label>      
+                                                 <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_RxSpeed" data-value="0" et="change:changeDropdownList"/>
+                                                    Rx Speed
+                                                </label>    
+                                                <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_TxSpeed" data-value="0" et="change:changeDropdownList"/>
+                                                    Tx Speed
+                                                </label>    
+                                                 <label class="dropdown-option">
+                                                     <input type="checkbox" name="dropdown-group" value="tbl_TotalTx" data-value="0" et="change:changeDropdownList"/>
+                                                     Total Tx
+                                                 </label>      
+                                                 <label class="dropdown-option">
+                                                     <input type="checkbox" name="dropdown-group" value="tbl_TotalRx" data-value="0" et="change:changeDropdownList"/>
+                                                     Total Rx
+                                                 </label>      
+                                                 <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_Status" data-value="0" et="change:changeDropdownList"/>
+                                                    Status
+                                                </label>      
+                                                <label class="dropdown-option">
+                                                    <input type="checkbox" name="dropdown-group" value="tbl_AuthMode" data-value="0" et="change:changeDropdownList"/>
+                                                    Auth Method
+                                                </label>      
+                                              </div>
+            
+                                         </div>
+                                         <div class="pull-right"  style="position:relative;">
+                                            <input type="text" class="form-control" id="seach_device_mac">
+                                            <span class="seach-icon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                        </div>
+                                         <div class="form-left text-right pull-right">
+                                            <h5>Mac/IP Filter: </h5>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                            
+                            </div>
+                            
+                        </div>
+                    </div>
+                        <div class="row mrg-t-lg hide">
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="col-lg-4 text-left">
+                                    <button sh_lang="aps_only" class="btn btn-primary mrg-l-lg bm_btn padding-r-lg padding-l-lg btn_lg" href="#settingbox_24g" role="presentation" data-toggle="tab" aria-controls="setting_24g" aria-expanded="true" et="click tap:changeTab" id="btn_aps_only" />
+                                </div>
+                                <div class="col-lg-4 text-center">
+                                    <button sh_lang="aps_with_clients"  href="#settingbox_58g" role="presentation"
+                                    class="btn btn-primary  bm_btn padding-r-lg padding-l-lg btn_lg"
+                                    role="tab" data-toggle="tab" aria-controls="setting_58g"  et="click tap:changeTab" id="btn_aps_with_clients" />
+                                </div>
+                                <div class="col-lg-4 text-right">
+                                    <button sh_lang="wifi_clients"  href="#settingbox_adv" role="presentation"
+                                    class="btn btn-primary mrg-r-lg  bm_btn padding-r-lg padding-l-lg btn_lg"
+                                    role="tab" data-toggle="tab" aria-controls="settingbox_adv"  et="click tap:changeTab" id="btn_wifi_clients" />
+                                </div>
+                            </div>
+                    </div>
+                        <div class="tab-content mrg-t-lg" id="standard">
+                            <div class="main-box-body">
+                                <div class="row list">
+                                    <div class="col-lg-4">
+                                        <div class="main-box emerald-box project-box" id="box_wifi_total" style="min-height:120px; padding-bottom:10px; box-shadow: 1px 1px 2px 1px #CCCCCC;">
+                                            <div class="row" style="margin-left:auto;margin-right:auto;width:90%">
+                                                <div class="row text-center border-bottom-light"><h4>Total</h4></div>
+                                                <div class="row list">
+                                                    <div class="col-lg-8"><span class="mrg-l-lg">All WiFi Clients: </span></div>
+                                                    <div class="col-lg-4"><span id="wifi_client_count" style='font-weight:bold;'></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="main-box emerald-box project-box"  id="box_wireless" style="min-height:120px; padding-bottom:10px; box-shadow: 1px 1px 2px 1px #CCCCCC;">
+                                            <div class="row" style="margin-left:auto;margin-right:auto;width:90%">
+                                                <div class="row text-center border-bottom-light"><h4>Wireless Clients</h4></div>
+                                                <div class="row list">
+                                                    <div class="col-lg-8"><span class="mrg-l-lg">2.4 GHz: </span></div>
+                                                    <div class="col-lg-4"><span id="wireless_24_cnt" style='font-weight:bold;'></span></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-8"><span class="mrg-l-lg">5.8 GHz: </span></div>
+                                                    <div class="col-lg-4"><span id="wireless_58_cnt" style='font-weight:bold;'></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="main-box emerald-box project-box"  id="box_ssid" style="min-height:120px; padding-bottom:10px; box-shadow: 1px 1px 2px 1px #CCCCCC;">
+                                            <div class="row"style="margin-left:auto;margin-right:auto;width:90%">
+                                                <div class="row text-center border-bottom-light"><h4>SSIDs</h4></div>
+                                                <div id="ssid_list" class="row list">
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="main-box clearfix">
+								<div class="main-box-body tab-pane active" style="padding-bottom: 0" id="manage">
+
+									<div class="table-respon">
+										<table class="table" id="perfor_table" style="font-size:12px">
+											<thead id="parent_heading">
+												<tr>
+													<th class="text-center">
+														<span style="min-width: 40px" sh_lang="global_No"></span>
+													</th>
+													<th class="text-center hidden">
+														<span></span>
+													</th>
+													<th class="text-center devicemac tbl_TerminalMac"><span style="width:80px" sh_lang="ac_terminalMac"></span></th>
+													<th class="text-center deviceip tbl_TerminalIp"><span style="width:80px" sh_lang="ac_terminalIp"></span></th> 
+													<th class="text-center tbl_OS"><span style="width:80px">Vender</span></th>
+													<th class="text-center tbl_DeviceName"><span style="width:80px">Host Name</span></th>
+													<th class="text-center tbl_HostName">AP Name</th>
+													<th class="text-center tbl_SSID"><span style="width:80px" sh_lang="ac_apSsid"></span></th>
+													<th class="text-center tbl_Type"><span style="width:80px" sh_lang="ac_apSsidRange"></span></th>
+													<th class="text-center tbl_Channel"><span style="width:80px">Channel</span></th>
+													<th class="text-center tbl_Vlan"><span style="width:80px">VLAN</span></th>
+													<th class="text-center tbl_Radio"><span style="width:80px">Radio</span></th>
+													<th class="text-center tbl_Signal"><span style="width:80px" sh_lang="ac_apSignal"></span></th>
+													<th class="text-center tbl_SNR"><span style="width:50px">SNR</span></th>
+													<th class="text-center tbl_LinkTime"><span style="width:66px" sh_lang="ac_terminalLinkTime"></span></th>
+													<th class="text-center tbl_RxSpeed"><span style="width:66px" >RX Speed</span></th>
+													<th class="text-center tbl_TxSpeed"><span style="width:66px" >TX Speed</span></th>
+													<th class="text-center tbl_TotalTx"><span style="width:66px" sh_lang="ac_terminalTxByte"></span></th>
+													<th class="text-center tbl_TotalRx"><span style="width:66px" sh_lang="ac_terminalRxByte"></span></th>
+													<th class="text-center tbl_Status"><span style="width:66px">Status</span></th>
+													<th class="text-center tbl_AuthMode"><span style="width:66px">Auth Method</span></th>
+												</tr>
+										 
+											</thead>
+											<tbody id="perfor_tbody"></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <!--left content end-->
+                </div>
+                <div class="row">
+                    <div id="footer-bar" style="opacity: 1;">
+                        <p id="footer-copyright" class="col-xs-12" sh_lang="copyright"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="set_tips"></div>
+</body>
+</html>
+<script type="text/javascript" src="/common/lib/jquery.js"></script>
+<script type="text/javascript" src="/common/sea.js"></script>
+<script type="text/javascript" src="/common/lib/multiselect.js"></script>
+<script type="text/javascript">
+    var moduleName = document.body.getAttribute("module");
+    if (moduleName) {
+        seajs.use([moduleName, "touch"], function (page) {
+            page.init();
+        });
+    }
+</script>
