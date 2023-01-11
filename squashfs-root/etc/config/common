@@ -1,0 +1,9 @@
+config common 'qos'
+	option mode '1'
+	option surf_max '5'
+	option p2p_max '5'
+	option enable_limit '1'
+	option enable '0'
+
+config map 'limitlist'
+	option list '0,'
