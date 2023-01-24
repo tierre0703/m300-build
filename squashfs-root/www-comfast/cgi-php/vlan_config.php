@@ -1,5 +1,6 @@
 <?php
 $method = !empty($_GET["method"]) ? $_GET["method"] : "";
+$iswan = !empty($_GET["iswan"]) ? $_GET["iswan"] : false;
 $action = !empty($_GET["action"]) ? $_GET["action"] : "";
 
 function str_clean($str)
@@ -22,6 +23,43 @@ function get_ifname($interface) {
     $ifname = shell_exec($cmd);
     $ifname = str_clean($ifname);
     return $ifname;
+}
+
+function add_firewall_zone($network) {
+    for($i = 0; $i < 3; $i++)
+    {
+        $cmd = sprintf("uci get firewall.@zone[%d].name 2>/dev/null", $i);
+        $zone_name = shell_exec($cmd);
+        $zone_name = str_clean($zone_name);
+        if($zone_name == "wan"){
+            // set uci
+            $cmd = sprintf("uci del_list firewall.@zone[%d].network=%s 2>/dev/null", $i, $network);
+            shell_exec($cmd);
+            $cmd = sprintf("uci add_list firewall.@zone[%d].network=%s 2>/dev/null", $i, $network);
+            shell_exec($cmd);
+
+            shell_exec("uci commit firewall");
+            return;
+        }
+    }
+}
+
+function delete_firewall_zone($network) {
+    for($i = 0; $i < 3; $i++)
+    {
+        $cmd = sprintf("uci get firewall.@zone[%d].name 2>/dev/null", $i);
+        $zone_name = shell_exec($cmd);
+        $zone_name = str_clean($zone_name);
+        if($zone_name == "wan"){
+            // set uci
+            $cmd = sprintf("uci del_list firewall.@zone[%d].network=%s 2>/dev/null", $i, $network);
+            shell_exec($cmd);
+
+            shell_exec("uci commit firewall");
+            return;
+        }
+    }
+
 }
 
 function delete_vlan($num){
@@ -251,6 +289,15 @@ else if($method == 'SET') {
 			$cmd = sprintf("uci set vlan.vlan_list.list='%d,%s,'", count($deleted_nums), implode(",", $deleted_nums));
 			shell_exec($cmd);
             shell_exec("uci commit vlan");
+
+            if($iswan == true){
+                foreach($del_nums as $k => $num){
+                    if($num == "") continue;
+                    $network_name = sprintf("vlan%s", $num);
+                    delete_firewall_zone($network_name);
+                }
+            }
+
             apply_change();
 
 		}
@@ -270,6 +317,11 @@ else if($method == 'SET') {
             $real_nums = get_real_nums();
     		$real_nums[] = $real_num;
             add_vlan($real_nums, $real_num,$ifname,$port,$desc, $ipaddr, $netmask, $gateway );
+
+            if($iswan == true){
+                $network_name = sprintf("vlan%s", $real_num);
+                add_firewall_zone($network_name);
+            }
 
             shell_exec("uci commit vlan");
             apply_change();

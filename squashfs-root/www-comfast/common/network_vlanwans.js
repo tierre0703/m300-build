@@ -788,7 +788,7 @@ define(function (require, b) {
 
     function set_config(arg) {
 		run_waitMe('ios');
-        f.setSHConfig('vlan_config.php?method=SET', arg, function(data){
+        f.setSHConfig('vlan_config.php?method=SET&iswan=true', arg, function(data){
             if (data.errCode != 0) {
                 h.ErrorTip(tip_num++, data.errCode);
                 lock_web = false;
