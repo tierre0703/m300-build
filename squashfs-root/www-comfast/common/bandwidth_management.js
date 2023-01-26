@@ -48,7 +48,7 @@ define(function (require, exports) {
 
                 ip_limit_ip : "",
                 limit_up_rate : 0,
-                limit_up_rate : 0,  //we will use down rate as base limit
+                limit_down_rate : 0,  //we will use down rate as base limit
                 allocation_rate : 0,
                 ip_limit_real_num : -1
             }
@@ -134,7 +134,7 @@ define(function (require, exports) {
             {
                 //vlan index will be from 10
                 var t_id = vlan_info.wan_ifname.substr(4);
-                wan_index = parseInt(t_id) - 100 + 10;
+                wan_index = parseInt(t_id) - 100 + 10 + 200;
             }
             else // wan
             {
@@ -295,8 +295,9 @@ define(function (require, exports) {
             var _ip_index = -1;
             var _wan_index =  -1;
             var wan_ifname = vlan_info.wan_ifname;
-            var upload_limit = vlan_info.limit_up_rate;
-            var download_limit = vlan_info.limit_down_rate;
+            var wan_limit = 1000 * 1000; // current use with const
+            var upload_limit = wan_limit; //vlan_info.limit_up_rate;
+            var download_limit = wan_limit; //vlan_info.limit_down_rate;
             var allocation_rate = vlan_info.allocation_rate;
             var comments = "";
 
@@ -333,7 +334,7 @@ define(function (require, exports) {
             //add
             if(real_num == -1)
             {
-                if(_wan_index != -1)
+                //if(_wan_index != -1)
                 {//add
                     var arg = {};
                     //if(allocation_rate == 0)
@@ -345,16 +346,16 @@ define(function (require, exports) {
                         arg.operate = "add";
                         arg.enable = "1";
                         arg.ip = str_ip;
-                        arg.uprate = allocation_rate == 0 ? "10" : parseInt(parseInt(upload_limit * allocation_rate/ 100 / 1000) * 1000).toString();
+                        arg.uprate = allocation_rate == 0 ? "100" : parseInt(parseInt(upload_limit * allocation_rate/ 100 / 1000) * 1000).toString();
                         if(arg.uprate == "0")
                         {
-                            arg.uprate = "10"; //"1000";
+                            arg.uprate = "100"; //"1000";
                         }
 
-                        arg.downrate = allocation_rate == 0 ? "10" : parseInt(parseInt(download_limit * allocation_rate / 100 / 1000) * 1000).toString();
+                        arg.downrate = allocation_rate == 0 ? "100" : parseInt(parseInt(download_limit * allocation_rate / 100 / 1000) * 1000).toString();
                         if(arg.downrate == "0")
                         {
-                            arg.downrate = "10"; //"1000";
+                            arg.downrate = "100"; //"1000";
                         }
                         arg.comment = comments; //vlan_info.descname + "limit " + parseInt(download_limit * allocation_rate / 100 / 1000) + "Mbps";
                         arg.comment = arg.comment.substr(0, 20);
@@ -373,7 +374,8 @@ define(function (require, exports) {
             }
             else
             {
-                if(_wan_index == -1)
+                //if(_wan_index == -1)
+                if(wan_ifname == "")
                 {//delete
                     var arg = {};
                     arg.list = "" + real_num + ",";
@@ -399,13 +401,13 @@ define(function (require, exports) {
                         arg.real_num = real_num;
                         arg.enable = "1";
                         arg.ip = str_ip;
-                        arg.uprate =  allocation_rate == 0 ? "10" : parseInt(parseInt(upload_limit * allocation_rate/ 100 / 1000) * 1000).toString();
+                        arg.uprate =  allocation_rate == 0 ? "100" : parseInt(parseInt(upload_limit * allocation_rate/ 100 / 1000) * 1000).toString();
                         if(arg.uprate == "0")
-                            arg.uprate = "1000";
+                            arg.uprate = "100";
 
-                        arg.downrate = allocation_rate == 0 ? "10" : parseInt(parseInt(download_limit * allocation_rate / 100 / 1000) * 1000).toString();
+                        arg.downrate = allocation_rate == 0 ? "100" : parseInt(parseInt(download_limit * allocation_rate / 100 / 1000) * 1000).toString();
                         if(arg.downrate == "0")
-                            arg.downrate = "1000";
+                            arg.downrate = "100";
                         arg.comment = comments;//vlan_info.descname + "limit " + parseInt(download_limit * allocation_rate/ 100 / 1000) + "Mbps";
                         arg.comment = arg.comment.substr(0, 20);
                         arg.share = "0";

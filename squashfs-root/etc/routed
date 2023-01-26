@@ -64,7 +64,7 @@ for entry in `ubus list | grep vlan | cut -d . -f 3`; do
         wanname=${entry}
         br_name=${entry}
         begin_index=10
-        table_id=$((vlan_index+begin_index+100))
+        table_id=$((vlan_index+begin_index+300))
 
         echo $table_id
         echo $wanname
