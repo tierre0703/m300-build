@@ -83,6 +83,7 @@ define(function (require, b) {
                 double_support = data.double_support;
                 dev_vlan_type = data.vlan_itype;
                 vlan_config = data.vlan || [];
+                vlan_config.sort((a, b)=>a.id - b.id);
                 vlan_id_scopen(data.vlan_min, data.vlan_max);
                 page_init();
             }
@@ -150,15 +151,35 @@ define(function (require, b) {
             }
             index++;
             used_vlan.push(m.port);
+
+            var ipaddr = "";
+            var gateway = '';
+            var proto = "";
+            //add dns
+            var dns = "", main_dns, second_dns;
+
+                d.each(vlan_gateway, function(gateway_index, gateway_data){
+                    if(m.real_num == gateway_data['real_num'])
+                    {                   
+                        gateway = gateway_data['gateway'];
+                        dns = gateway_data['dns'];
+
+                        ipaddr =  gateway_data["ip"];
+                        proto = gateway_data['proto'];
+                        return false;
+                    }
+                });
             this_html += '<tr class="text-left">';
             this_html += '<td class="real_num hidden" >' + m.real_num + '</td>';
+            this_html += '<td class="vlan_proto hidden" >' + proto + '</td>';
             this_html += '<td class="text-center"><input class="row_checkbox" type="checkbox" /></td>';
             //this_html += '<td>' + (n + 1) + '</td>';
             this_html += '<td>' + (index) + '</td>';
             this_html += '<td class="vlan_name">' + m.iface.toUpperCase() + '</td>';
             this_html += '<td class="vlan_id">' + m.id + '</td>';
             if(m.ipaddr == ""){
-                this_html += '<td class="">*</td>';
+                
+                this_html += '<td class="">'+(ipaddr ? ipaddr : '*') +'</td>';
             }else {
                 this_html += '<td class="vlan_ipaddr" >' + m.ipaddr + '</td>';
             }
@@ -169,12 +190,14 @@ define(function (require, b) {
                 this_html += '<td class="vlan_netmask" >' + m.netmask + '</td>';
             }
 
-            this_html += '<td class="vlan_port" >' + (m.port.toUpperCase() || undistributed) + '</td>';
-            this_html += '<td class="vlan_desc" >' + m.desc + '</td>';
-            //add dns
-            var dns = "", main_dns, second_dns;
+            this_html += '<td class="vlan_gateway">' + gateway + '</td>';
             
-            d.each(all_vlan_dhcp_list, function(dhcp_index, dhcp_info){
+            this_html += '<td class="vlan_port" >' + (m.port.toUpperCase() || undistributed) + '</td>';
+            this_html += '<td class="vlan_line hidden"></td>';
+            this_html += '<td class="vlan_desc" >' + m.desc + '</td>';
+           
+            
+           /* d.each(all_vlan_dhcp_list, function(dhcp_index, dhcp_info){
                 if(dhcp_info.iface == m.iface)
                 {
                     if(typeof dhcp_info.dhcp !== "undefined")
@@ -183,15 +206,14 @@ define(function (require, b) {
                             dns = dhcp_info.dhcp.dns;
                     }
                 }
-            });
+            });*/
             dns_arr = dns.split(",");
             main_dns = dns_arr[0];
             second_dns = dns_arr.length > 1 ? dns_arr[1] : "";
 
-            this_html += '<td class="vlan_dns hidden">' + main_dns + '</td>';
-            //add secondary dns
-            this_html += '<td class="vlan_dns2 hidden">' + second_dns + '</td>';
+            this_html += '<td class="vlan_dns">' + dns + '</td>';
 
+            this_html += '<td class="vlan_dns2 hidden"></td>';
             var vlan_intervlan = "";
             d.each(intervlan_list, function(intervlan_index, intervlan_info){
                 if(m.iface == intervlan_info.vlan_name)
@@ -230,16 +252,7 @@ define(function (require, b) {
             this_html += '<td class="vlan_intervlan hidden">' + vlan_intervlan +  '</td>';
 
             this_html += '<td class="text-center"><a data-toggle="modal" data-target="#modal_one" class="table-link" et="click tap:editConfig"><span class="fa-stack"><i class="fa fa-square fa-stack-2x"></i><i title="' + edit + '"  class="fa fa-pencil fa-stack-1x fa-inverse"></i></span></a></td>';
-            var gateway = '';
-            d.each(vlan_gateway, function(gateway_index, gateway_data){
-                if(m.real_num == gateway_data['real_num'])
-                {
-                    gateway = gateway_data['gateway'];
-                    return false;
-                }
-            });
-            this_html += '<td class="vlan_gateway hidden">' + gateway + '</td>';
-            this_html += '</tr>';
+           this_html += '</tr>';
         });
         d('#tbody_info').html(this_html);
 
@@ -248,6 +261,7 @@ define(function (require, b) {
                 "columns": [
                     {"orderable": false},
                     {"orderable": false},
+                    {"orderable": false},
                     null,
                     null,
                     null,
@@ -257,9 +271,10 @@ define(function (require, b) {
                     null,
                     {"orderable": false},
                     null,
-                    null,
                     {"orderable": false},
-                    null
+                    {"orderable": false},
+                    {"orderable": false},
+                    {"orderable": false},
                 ]
             });
             this_table.page.len(default_num).draw();
@@ -375,6 +390,21 @@ define(function (require, b) {
         //});
 
         d('#moreline').html(line_html);
+    }
+
+    et.wanTypeConfig = function () {
+        var proto_value = d("#proto").val();
+        if (proto_value == "static") {
+            d("#static_div").removeClass('hide');
+            d("#pppoe_div").addClass('hide');
+            d("#dhcp_div").addClass('hide');
+            d("#dest_vlan_ipaddr").removeAttr('disabled');
+        } else if (proto_value == "dhcp") {
+            d("#static_div").addClass('hide');
+            d("#pppoe_div").addClass('hide');
+            d("#dhcp_div").removeClass('hide');
+            d('#dest_vlan_ipaddr').attr('disabled', true);
+        }
     }
 
     et.vlantype = function (evt) {
@@ -558,7 +588,7 @@ define(function (require, b) {
         wan_disabled(vlan_port.toLowerCase());
         d('#moreline').val(vlan_port.toLowerCase())
         d('#dest_vlan_dns').val(d(evt).parents('tr').find('.vlan_dns').html());
-        d('#dest_vlan_dns2').val(d(evt).parents('tr').find('.vlan_dns2').html());
+        //d('#dest_vlan_dns2').val(d(evt).parents('tr').find('.vlan_dns2').html());
         var intervlan = d(evt).parents('tr').find('.vlan_intervlan').html();
 
         //intervlan
@@ -571,6 +601,10 @@ define(function (require, b) {
                 return false;
             }
         });
+
+
+        d('#proto').val(d(evt).parents('tr').find('.vlan_proto').html())
+        et.wanTypeConfig();
 
 
         var intervlans = intervlan.split(',');
@@ -698,7 +732,8 @@ define(function (require, b) {
         b.netmask = d("#dest_vlan_netmask").val();
         b.desc = d("#dest_vlan_desc").val();
         b.dns = d('#dest_vlan_dns').val();
-        b.dns2 = d('#dest_vlan_dns2').val();
+        b.proto = d('#proto').val();
+        //b.dns2 = d('#dest_vlan_dns2').val();
 
         //b.intervlan = d('#dest_vlan_intervlan').val();
         b.intervlan = "";

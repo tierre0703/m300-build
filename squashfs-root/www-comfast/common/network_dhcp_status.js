@@ -187,14 +187,17 @@ define(function (require, b) {
             var vlan_iface = "";
 
             d.each(vlan_config, function(vlan_index, vlan_info){
-                var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_info.ipaddr, vlan_info.netmask);
-                if(dec_ip >= calc_data.ipLow && dec_ip <= calc_data.ipHigh)
-                {
-                    //this ip is in this vlan_config
-                    vlan_name = vlan_info.desc == "" ? vlan_info.iface : vlan_info.desc;
-                    vlan_iface = vlan_info.iface;
-                    return false;
+                if(vlan_info.ipaddr){
+                    var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_info.ipaddr, vlan_info.netmask);
+                    if(dec_ip >= calc_data.ipLow && dec_ip <= calc_data.ipHigh)
+                    {
+                        //this ip is in this vlan_config
+                        vlan_name = vlan_info.desc == "" ? vlan_info.iface : vlan_info.desc;
+                        vlan_iface = vlan_info.iface;
+                        return false;
+                    }
                 }
+
             });
 
             d.each(lan_list, function(lan_index, lan_info){

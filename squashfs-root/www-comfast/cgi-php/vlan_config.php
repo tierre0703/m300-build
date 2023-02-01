@@ -87,20 +87,34 @@ function delete_vlan($num){
     $cmd = sprintf("uci delete vlan.vlan%s.netmask 2>/dev/null", $num); shell_exec($cmd);
     $cmd = sprintf("uci delete vlan.vlan%s.gateway 2>/dev/null", $num); shell_exec($cmd);
     $cmd = sprintf("uci delete vlan.vlan%s.ifname 2>/dev/null", $num); shell_exec($cmd);
+    $cmd = sprintf("uci delete vlan.vlan%s.dns 2>/dev/null", $num); shell_exec($cmd);
     $cmd = sprintf("uci delete vlan.vlan%s 2>/dev/null", $num); shell_exec($cmd);
 }
-function add_vlan($real_nums, $real_num,$ifname,$port,$desc, $ipaddr, $netmask, $gateway ) {
+function add_vlan($real_nums, $real_num,$ifname,$port,$desc, $ipaddr, $netmask, $gateway, $dns, $proto ) {
     $cmd = sprintf("uci set vlan.vlan%s=interface", $real_num); shell_exec($cmd);
 	
-    $proto = $ipaddr== "" ? "dhcp" : "static";
+    //$proto = $ipaddr== "" ? "dhcp" : "static";
     $cmd = sprintf("uci set vlan.vlan%s.type='bridge'", $real_num); shell_exec($cmd);
     $cmd = sprintf("uci set vlan.vlan%s.ip6assign='60'", $real_num); shell_exec($cmd);
     $cmd = sprintf("uci set vlan.vlan%s.ifname='%s.%s'", $real_num, $ifname, $real_num); shell_exec($cmd);
     $cmd = sprintf("uci set vlan.vlan%s.proto='%s'", $real_num, $proto); shell_exec($cmd);
+    if($dns  != ""){
+        $cmd = sprintf("uci set vlan.vlan%s.dns='%s'", $real_num, $dns); shell_exec($cmd);
+    }
     if($proto == "static"){
         $cmd = sprintf("uci set vlan.vlan%s.ipaddr='%s'", $real_num, $ipaddr); shell_exec($cmd);
         $cmd = sprintf("uci set vlan.vlan%s.netmask='%s'", $real_num, $netmask); shell_exec($cmd);
         $cmd = sprintf("uci set vlan.vlan%s.gateway='%s'", $real_num, $gateway); shell_exec($cmd);
+    }
+
+    if($proto == "dhcp"){
+        if($netmask != ""){
+            $cmd = sprintf("uci set vlan.vlan%s.netmask='%s'", $real_num, $netmask); shell_exec($cmd);
+        }
+        if($gateway != ""){
+            $cmd = sprintf("uci set vlan.vlan%s.gateway='%s'", $real_num, $gateway); shell_exec($cmd);
+
+        }
     }
     
     $cmd = sprintf("uci set vlan.com_vlan%s=com", $real_num); shell_exec($cmd);
@@ -139,6 +153,7 @@ function get_real_nums() {
 		else $real_nums[] = intval($num);
 		$index++;
 	}
+    arsort($real_nums);
 	return $real_nums;
 }
 
@@ -166,6 +181,14 @@ if($method == 'GET'){
             $ret = shell_exec($cmd);
             $ifname = str_clean($ret);
 
+            $cmd = sprintf("uci get vlan.vlan%s.dns 2>/dev/null", $real_num);
+            $ret = shell_exec($cmd);
+            $dns = str_clean($ret);
+
+            $cmd = sprintf("uci get vlan.vlan%s.proto 2>/dev/null", $real_num);
+            $ret = shell_exec($cmd);
+            $proto = str_clean($ret);
+
 
             $cmd = sprintf('ubus call network.interface.vlan%s status 2>/dev/null', $real_num);
             $ret = shell_exec($cmd);
@@ -184,7 +207,7 @@ if($method == 'GET'){
             }
 
 
-            $data[] = array('real_num'=>$real_num, 'gateway'=>$gateway, 'up'=>$up, 'ip'=>$ip, 'port'=>$port, 'iface'=>'vlan'.$real_num, 'ifname'=>$ifname, 'desc'=>$desc);
+            $data[] = array('real_num'=>$real_num, 'gateway'=>$gateway, 'up'=>$up, 'ip'=>$ip, 'port'=>$port, 'iface'=>'vlan'.$real_num, 'ifname'=>$ifname, 'desc'=>$desc, 'dns'=>$dns, 'proto'=>$proto);
         }
         $response = array("errCode"=>0, 'data'=>$data);
         echo json_encode($response);
@@ -207,7 +230,8 @@ else if($method == 'SET') {
             $ipaddr = $data['ipaddr'];
             $netmask = $data['netmask'];
             $gateway = $data['gateway'];
-            $proto = $ipaddr == "" ? 'dhcp' : 'static';
+            $dns = $data['dns'];
+            $proto = $data['proto'];//$ipaddr == "" ? 'dhcp' : 'static';
 
             $ifname = get_ifname($port);
             $real_nums = get_real_nums();
@@ -226,15 +250,27 @@ else if($method == 'SET') {
                 }
                 $deleted_nums[] = $id;
 
-                add_vlan($deleted_nums, $id,$ifname,$port,$desc, $ipaddr, $netmask, $gateway );
+                add_vlan($deleted_nums, $id,$ifname,$port,$desc, $ipaddr, $netmask, $gateway, $dns, $proto );
             }
             else {
                 $cmd = sprintf("uci set vlan.vlan%s.ifname='%s.%s'", $real_num, $ifname, $real_num); shell_exec($cmd);
                 $cmd = sprintf("uci set vlan.vlan%s.proto='%s'", $real_num, $proto); shell_exec($cmd);
                 if($proto == "dhcp"){
-                    $cmd = sprintf("uci delete vlan.vlan%s.netmask 2>/dev/null", $real_num); shell_exec($cmd);
+                    
+                    
+                    if($netmask != ""){
+                        $cmd = sprintf("uci set vlan.vlan%s.netmask='%s'", $real_num, $netmask); shell_exec($cmd);
+                    }else{
+                        $cmd = sprintf("uci delete vlan.vlan%s.netmask 2>/dev/null", $real_num); shell_exec($cmd);
+                    }
+                    if($gateway != ""){
+                        $cmd = sprintf("uci set vlan.vlan%s.gateway='%s'", $real_num, $gateway); shell_exec($cmd);
+                    }else{
+                        $cmd = sprintf("uci delete vlan.vlan%s.gateway 2>/dev/null", $real_num); shell_exec($cmd);
+                    }
+
+                    
                     $cmd = sprintf("uci delete vlan.vlan%s.ipaddr 2>/dev/null", $real_num); shell_exec($cmd);
-                    $cmd = sprintf("uci delete vlan.vlan%s.gateway 2>/dev/null", $real_num); shell_exec($cmd);
 
                 }
                 else
@@ -247,7 +283,12 @@ else if($method == 'SET') {
                 
                 $cmd = sprintf("uci set vlan.com_vlan%s.port='%s'", $real_num, $port); shell_exec($cmd);
                 $cmd = sprintf("uci set vlan.com_vlan%s.desc='%s'", $real_num, $desc); shell_exec($cmd);
-                
+                if($dns == ""){
+
+                    $cmd = sprintf("uci delete vlan.vlan%s.dns 2>/dev/null", $real_num); shell_exec($cmd);
+                }else{
+                    $cmd = sprintf("uci set vlan.vlan%s.dns='%s'", $real_num, $dns); shell_exec($cmd);
+                }
 
                 $cmd = sprintf("uci set vlan.vlan_list.list='%d,%s,'", count($real_nums), implode(",", $real_nums));
 			
@@ -309,14 +350,16 @@ else if($method == 'SET') {
             $ipaddr = $data['ipaddr'];
             $netmask = $data['netmask'];
             $gateway = $data['gateway'];
-            $proto = $ipaddr == "" ? 'dhcp' : 'static';
+            $dns = $data['dns'];
+            $proto = $data['proto']; //$ipaddr == "" ? 'dhcp' : 'static';
 
 
             $ifname = get_ifname($port);
 
             $real_nums = get_real_nums();
     		$real_nums[] = $real_num;
-            add_vlan($real_nums, $real_num,$ifname,$port,$desc, $ipaddr, $netmask, $gateway );
+            arsort($real_nums);
+            add_vlan($real_nums, $real_num,$ifname,$port,$desc, $ipaddr, $netmask, $gateway, $dns, $proto );
 
             if($iswan == true){
                 $network_name = sprintf("vlan%s", $real_num);

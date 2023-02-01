@@ -68,6 +68,8 @@ define(function (require, b) {
                 double_support = data.double_support;
                 dev_vlan_type = data.vlan_itype;
                 vlan_config = data.vlan || [];
+                vlan_config.sort((a, b)=>a.id - b.id);
+
                 vlan_id_scopen(data.vlan_min, data.vlan_max);
                 page_init();
             }
@@ -125,6 +127,8 @@ define(function (require, b) {
         d('#select_laber').text(selectall_tab);
         d('#allchecked').prop('checked', false).attr('data-value', '0');
 
+        var index = 0;
+
         d.each(vlan_config, function (n, m) {
             if (m.port.indexOf("vlan") < 0) {
                 all_vlan_iface.push(m.iface);
@@ -136,7 +140,7 @@ define(function (require, b) {
             this_html += '<tr class="text-left">';
             this_html += '<td class="real_num hidden" >' + m.real_num + '</td>';
             this_html += '<td class="text-center"><input class="row_checkbox" type="checkbox" /></td>';
-            this_html += '<td>' + (n + 1) + '</td>';
+            this_html += '<td>' + (++index) + '</td>';
             this_html += '<td class="vlan_name">' + m.iface.toUpperCase() + '</td>';
             this_html += '<td class="vlan_id">' + m.id + '</td>';
             if(m.ipaddr == ""){
