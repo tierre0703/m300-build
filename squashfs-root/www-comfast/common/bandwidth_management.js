@@ -331,6 +331,14 @@ define(function (require, exports) {
                 }
             });
 
+            d.each(vlan_wans, function(vlan_idx, vlan_info){
+
+                if(wan_ifname == vlan_info.iface){
+                    upload_limit = vlan_info.upload;
+                    download_limit = vlan_info.download;
+                }
+            });
+
             //add
             if(real_num == -1)
             {
@@ -448,6 +456,7 @@ define(function (require, exports) {
                     vlan_wans.push(vlan);
                 }
             });
+            vlan_wans.sort((a, b)=>a.real_num - b.real_num);
 
 
             vlan_extra_config = data.data || {};
@@ -768,8 +777,14 @@ define(function (require, exports) {
 					}
 					
 					return false;
-				}
-            
+                }	
+            });
+
+            d.each(vlan_wans, function(vlan_index, vlan_info){
+                if(vlan_info.iface == _wan_ifname){
+                    wan_speed = vlan_info.download;
+                    return false;
+                }
             });
             speed_limit = wan_speed * pecentage / 100;
 
@@ -953,6 +968,106 @@ define(function (require, exports) {
             </div>
         </div>`;
 
+        });
+
+        d.each(vlan_wans, function(n, vlan){
+            if (vlan.up) 
+            {
+                var wan_descname = (vlan.desc== "") ? vlan.iface : (vlan.iface + "(" + vlan.desc + ")");
+                wan_descname= wan_descname.toUpperCase();
+
+                var wan_ifname = vlan.iface;
+                //bm_info.wan_data[wan_index].isAutocheck = false;
+                //bm_info.wan_data[wan_index].autocheck_interval = 1; // in hours
+                //bm_info.wan_data[wan_index].network_speed_value_manual = 100*1024*1024;
+                var wan_isAutocheck = false; //m.isAutocheck;
+                var download_limit = vlan.download? (vlan.download / 1000) : 1000; //m.download / 1000; //m.network_speed_value_manual;
+                var upload_limit = vlan.upload? (vlan.upload / 1000) : 1000; //m.upload / 1000;
+
+                var download_limit_auto = 1000; //(m.download_limit_auto || 0)/ 1000;
+                var upload_limit_auto = 1000; //(m.upload_limit_auto || 0) / 1000;
+                var date = new Date(); //new Date((m.test_time || 0) * 1000);
+                var year = checkTime(date.getFullYear());
+                var month = checkTime(date.getMonth() + 1);
+                var day = checkTime(date.getDate());
+                var h = checkTime(date.getHours());
+                var mm = checkTime(date.getMinutes());
+                var s = checkTime(date.getSeconds());
+                var time_limit_auto = ""+ month +  "/" + day +  "/" + year + " " + h + ":" + mm + ":" + s;
+                
+                //if(typeof m.test_time == 'undefined' ){
+                //    time_limit_auto = "";
+                //}
+
+
+                text_html += `<div class="row" id="wan_box_${wan_ifname}">  
+                <div class="col-lg-12"> 
+                    <div class="main-box clearfix project-box emerald-box"> 
+                        <div class="main-box-header  with-border clearfix"> 
+                            <span sh_lang="internet_speed_test" class="vlan_heading">${internet_speed_test} </span> 
+                            <span id="wan_id_${wan_ifname}" class="vlan_heading">${wan_descname}</span> 
+                        </div> 
+                        <div class="main-box-body clearfix">
+                            <div class="mrg-t-md mrg-b-md with-border clearfix" style="margin-right:10px; margin-left:10px;"> 
+                                    <a id= "btn_manual_config_${wan_ifname}" data-value='${wan_ifname}'  class="bm_btn ${wan_isAutocheck ? "" : "active "}btn btn-primary beforebtn " et="click tap:func_manual_config">  
+                                        <span sh_lang="manual_config">${manual_config}</span>  
+                                    </a> 
+                                    <!--
+                                    <a id="btn_auto_config_${wan_ifname}" data-value='${wan_ifname}'  class="bm_btn ${wan_isAutocheck ? "active " : ""}btn btn-primary beforebtn pull-right" et="click tap:func_auto_test">  
+                                        <span sh_lang="str_auto_test">${str_auto_test}</span>  
+                                    </a>
+                                    --> 
+                            </div> 
+                            <div class="row light-border">
+                                <div id="container_limit_manual_${wan_ifname}" class="row list main-box-body ${wan_isAutocheck ? " hide" : ""}">  
+                                    <div class="col-lg-6 col-sm-6 col-xs-6 text-right"> 
+                                        <input type="text" value="${download_limit}" placeholder="For Manual:Input value box" class="form-control require isNULL isALL" id="text_limit_manual_${wan_ifname}" data-value='${wan_ifname}' et="click change:func_manual_config_change" /> 
+                                    </div>  
+                                    <div class="col-lg-3 col-sm-3 col-xs-3 form_left text-left">  
+                                        <span sh_lang="Mbps">${Mbps}</span>  
+                                    </div>  
+                                    <div class="col-lg-3 col-sm-3 col-xs-3 form_left text-left">  
+                                        <a id="save_manual_${wan_ifname}" data-value='${wan_ifname}'  class="bm_btn btn btn-primary beforebtn pull-right" et="click tap:save_wan_vlan_manual">  
+                                        <span>Apply</span>  
+                                    </a> 
+                                    </div>  
+                                </div>  
+                                <div id="container_limit_auto_${wan_ifname}" class="row mrg-t-sm main-box-body clearfix ${wan_isAutocheck ? "" : " hide"}">  
+                                    <div class="row mrg-t-sm clearfix">
+                                        <div class="col-lg-7 col-sm-8 form-group text-left">
+                                            <label class="col-lg-7 col-sm-4 mrg-t-sm" sh_lang="auto_test_schedule">${auto_test_schedule}</label>
+                                            <div class=" col-lg-5 col-sm-5">
+                                                <input id="scheduler_${wan_ifname}" type="text" class="timepicker form-control" et="click change:scheduler_change" data-value="${wan_ifname}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-5 col-sm-4 col-xs-4 text-right"> 
+                                            <a id="btn_start_auto_test_${wan_ifname}" data-value='${wan_ifname}' class="bm_btn btn btn-primary mrg-b-sm btn-sm beforebtn" et="click tap:func_start_test">  
+                                                <span sh_lang="perform_test">${perform_test}</span>  
+                                            </a>  
+                                        </div>  
+
+                                    </div>
+                                    <div class="row mrg-t-sm clearfix">
+                                        <fieldset class="groupbox-border">
+                                            <legend class="groupbox-border mrg-b-sm">Auto Test Result</legend>
+                                            <div class="row mrg-t-md mrg-b-md mrg-l-md mrg-r-md">
+                                                <div class="col-lg-6  col-sm-6 col-xs-8 text-left">
+                                                    <span>Bandwidth Test Result: </span><span style="font-size:1em" id="text_limit_auto_${wan_ifname}">${download_limit_auto}</span><span sh_lang="Mbps">${Mbps}</span>  
+                                                </div>
+                                                <div class="col-lg-6  col-sm-6 col-xs-8 text-right">  
+                                                    <span sh_lang="last_test_performed_at">${last_test_performed_at}</span><span style="font-size:1em" id="time_limit_auto_${wan_ifname}">${time_limit_auto}</span><br/>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>  
+                </div>
+            </div>`;
+        }
         });
 
         d('#wan_panel').html(text_html);
@@ -1207,7 +1322,127 @@ define(function (require, exports) {
             }
         })
     }
+   
     
+
+    et.save_wan_vlan_manual = function(evt) {
+    
+		var ifname = d(evt).attr('data-value');
+        d.each(vlan_wans, function(vlan_index, vlan_data){
+            if(vlan_data.iface == ifname){
+                var str = d('#text_limit_manual_' + ifname).val();
+                if(str == ""){
+                    h.ErrorTip(tip_num++, "Invalid WAN Interface Speed Limit.");
+                    return false;
+                }
+                
+                var bandwidth_speed = parseInt(str);
+                if(bandwidth_speed == 0) {
+                    h.ErrorTip(tip_num++, "Invalid WAN Interface Speed Limit.");
+                    return false;
+                }
+                var speed = 1000;
+                
+                /*d.each(wan_up_status, function(up_index, up_status){
+                    if(up_status.ifname == ifname){
+                        speed = up_status.speed;  				
+                        return false;	
+                    }
+                });*/
+                
+                if(bandwidth_speed > speed) {
+                    h.ErrorTip(tip_num++, "Input value is bigger than LINK Speed.");
+                    return false;
+                }
+                
+                /*d.each(bm_info.wan_data, function(wan_index, wan_data){
+                if(ifname == wan_data.ifname)
+                {
+                    var speed = parseInt(d('#text_limit_manual_' + wan_data.ifname).val())* 1000 ;
+                    bm_info.wan_data[wan_index].upload = speed;
+                    bm_info.wan_data[wan_index].download = speed;
+                    return false;
+                }*/
+			    run_waitMe('ios');
+                var arg = {};
+                arg.download = parseInt();
+			    arg.download = parseInt(d('#text_limit_manual_' + ifname).val())* 1000;
+			    arg.download = arg.download.toString();
+			    arg.upload = parseInt(d('#text_limit_manual_' + ifname).val()) * 1000;
+			    arg.upload = arg.upload.toString();
+                arg.action = "speed";
+                arg.real_num = vlan_data.real_num;
+                var args = [];
+                args.push(arg);
+                f.setSHConfig('vlan_config.php?method=SET', args, function (data){
+                    /*
+                    var arg = {};// wan_data;
+                    arg.download = parseInt(d('#text_limit_manual_' + wan_data.ifname).val())* 1000;
+                    arg.download = arg.download.toString();
+                    arg.upload = parseInt(d('#text_limit_manual_' + wan_data.ifname).val()) * 1000;
+                    arg.upload = arg.upload.toString();
+                    arg.hostname = wan_data.descname;
+                    arg.macaddr = wan_data.macaddr;
+                    arg.macclone = wan_data.macclone;
+                    arg.name = wan_data.name.toUpperCase();
+                    arg.phy_interface = wan_data.phy_interface;
+                    arg.proto = wan_data.proto;
+                    if(arg.proto == 'static') {
+                        arg.ipaddr = wan_data.ipaddr;
+                        arg.gateway = wan_data.gateway;
+                        arg.netmask = wan_data.netmask;
+                    }
+                    arg.real_num = wan_data.real_num;
+                    arg.action="edit";
+                    
+                    f.setMConfig('multi_pppoe', arg, function (data) {
+                        if (data.errCode != 0) {
+                            h.ErrorTip(tip_num++, data.errCode);
+                        } else {
+                            h.SetOKTip(tip_num++, set_success);
+                        }
+                    }, false);
+                    */
+                    d(evt).removeClass('active');
+                    setTimeout(function(){
+                        
+                        
+                        // retrive bm_conf data
+                        bm_info_to_bm_conf();
+                        //retrieve ip limit data and save
+                        bm_info_to_ip_limit();
+                        //wan data save
+                        bm_info_wan_save();
+
+                
+                        f.setSHConfig('bandwidth_config.php?method=SET&action=bm_save_data', bm_conf, function (data){
+                        
+
+                            if (data.errCode != 0) {
+                                h.ErrorTip(tip_num++, data.errCode);
+                                lock_web = false;
+                            } else {
+                                h.SetOKTip(tip_num++, set_success);
+                                set_change_flag(false, false);
+                                //refresh_init();
+                                setTimeout(reset_lock_web, 3000);
+                            }
+                            setTimeout(function(){
+                                refresh_init();
+                                release_loading(false);
+                            }, 20000);
+                        });
+                        
+                        
+                    }, 5000);
+                });
+
+    			return false;
+
+            }
+        });
+    }
+
     et.save_wan_manual = function(evt) {
     
 		var ifname = d(evt).attr('data-value');

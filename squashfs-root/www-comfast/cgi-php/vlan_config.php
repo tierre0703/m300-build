@@ -189,6 +189,14 @@ if($method == 'GET'){
             $ret = shell_exec($cmd);
             $proto = str_clean($ret);
 
+            $cmd = sprintf("uci get vlan.vlan%s.upload 2>/dev/null", $real_num);
+            $ret = shell_exec($cmd);
+            $upload = str_clean($ret);
+
+            $cmd = sprintf("uci get vlan.vlan%s.download 2>/dev/null", $real_num);
+            $ret = shell_exec($cmd);
+            $download = str_clean($ret);
+
 
             $cmd = sprintf('ubus call network.interface.vlan%s status 2>/dev/null', $real_num);
             $ret = shell_exec($cmd);
@@ -207,7 +215,10 @@ if($method == 'GET'){
             }
 
 
-            $data[] = array('real_num'=>$real_num, 'gateway'=>$gateway, 'up'=>$up, 'ip'=>$ip, 'port'=>$port, 'iface'=>'vlan'.$real_num, 'ifname'=>$ifname, 'desc'=>$desc, 'dns'=>$dns, 'proto'=>$proto);
+            $data[] = array('real_num'=>$real_num, 'gateway'=>$gateway, 'up'=>$up, 'ip'=>$ip, 'port'=>$port, 'iface'=>'vlan'.$real_num, 'ifname'=>$ifname, 'desc'=>$desc, 'dns'=>$dns, 'proto'=>$proto,
+                'upload'=>$upload,
+                'download'=>$download,
+            );
         }
         $response = array("errCode"=>0, 'data'=>$data);
         echo json_encode($response);
@@ -221,6 +232,19 @@ else if($method == 'SET') {
 
     $num = count($post_data);
     foreach($post_data as $key=>$data){
+        if($data['action'] == 'speed'){
+            $real_num = $data['real_num'];
+            $download = $data['download'];
+            $upload = $data['upload'];
+            //set download speed
+            $cmd = sprintf("uci set vlan.vlan%s.download=%s", $real_num, $download); shell_exec($cmd);
+            //set upload speed
+            $cmd = sprintf("uci set vlan.vlan%s.upload=%s", $real_num, $upload); shell_exec($cmd);
+
+            shell_exec("uci commit vlan");
+            // no need apply change
+            //apply_change();
+        }
         if($data['action'] == 'edit'){
             $real_num = $data['real_num'];
             $id = $data['id'];
