@@ -75,7 +75,6 @@ else if($method == "SET") {
 		$hostname = $post_data['hostname'];
 		
 		$cmd = sprintf("uci set network.%s.wanhostname='%s'", $iface, $hostname);
-		echo $cmd;
 		shell_exec($cmd);
 		shell_exec("uci commit network");
 
@@ -114,8 +113,6 @@ else if($method == "SET") {
 			if(array_key_exists("up", $ubus_data))
 			{
 				$up_status = $ubus_data['up'];
-				
-				echo $up_status;
 				
 				
 				if($up_status == true && $enable == 0)
@@ -181,12 +178,10 @@ else if($method == "SET") {
 					if($up_status == true && $benabled == 0)
 					{
 						$cmd = sprintf("ubus call network.interface.%s down", $v);
-						echo $cmd;
 						shell_exec($cmd);
 					}
 					else if($up_status == false && $benabled == 1) {
 						$cmd = sprintf("ubus call network.interface.%s up", $v);
-						echo $cmd;
 						shell_exec($cmd);
 					}
 				}

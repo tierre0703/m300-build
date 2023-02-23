@@ -222,6 +222,7 @@ define(function (require, b) {
         var proto_value = d("#proto").val();
         if (proto_value == "static") {
             d("#static_div").removeClass('hide');
+            d("#static_ip_div").removeClass('hide');
             d("#pppoe_div").addClass('hide');
             d("#dhcp_div").addClass('hide');
         } else if (proto_value == "pppoe") {
@@ -229,7 +230,9 @@ define(function (require, b) {
             d("#pppoe_div").removeClass('hide');
             d("#dhcp_div").addClass('hide');
         } else if (proto_value == "dhcp") {
-            d("#static_div").addClass('hide');
+            //d("#static_div").addClass('hide');
+            d("#static_div").removeClass('hide');
+            d("#static_ip_div").addClass('hide');
             d("#pppoe_div").addClass('hide');
             d("#dhcp_div").removeClass('hide');
         }
@@ -361,6 +364,13 @@ define(function (require, b) {
             a.mtu = d("#mtu").val();
         } else if (a.proto == "dhcp") {
             a.hostname = d("#dhcp_hostname").val();
+            a.netmask = d("#netmask").val();
+            a.gateway = d("#gateway").val();
+            dnsarry[0] = d("#dns_main").val();
+            dnsarry[1] = d("#dns_backup").val();
+
+            a.dns = filterdns(dnsarry).join(' ') || '';
+
         }
         return a;
     }
