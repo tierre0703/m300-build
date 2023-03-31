@@ -107,15 +107,20 @@ define(function (require, b) {
             var dec_ip = IpSubnetCalculator.toDecimal(devip);
             var vlan_name = "Default VLAN";
             var vlan_iface = "";
+            var vlan_id = 1;
 
             d.each(vlan_config, function(vlan_index, vlan_info){
-                var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_info.ipaddr, vlan_info.netmask);
-                if(dec_ip >= calc_data.ipLow && dec_ip <= calc_data.ipHigh)
-                {
-                    //this ip is in this vlan_config
-                    vlan_name = vlan_info.desc == "" ? vlan_info.iface.toUpperCase() : vlan_info.desc.toUpperCase();
-                    vlan_iface = vlan_info.iface;
-                    return false;
+                if(vlan_info.port.indexOf('wan') == -1){
+
+                    var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_info.ipaddr, vlan_info.netmask);
+                    if(dec_ip >= calc_data.ipLow && dec_ip <= calc_data.ipHigh)
+                    {
+                        //this ip is in this vlan_config
+                        vlan_name = vlan_info.desc == "" ? vlan_info.iface.toUpperCase() : vlan_info.desc.toUpperCase();
+                        vlan_iface = vlan_info.iface;
+                        vlan_id = vlan_info.id;
+                        return false;
+                    }
                 }
             });
 
@@ -137,8 +142,9 @@ define(function (require, b) {
             this_html += '<td class="text-center"><input class="row-checkbox" type="checkbox" /></td>';
             this_html += '<td>' + (n + 1) + '</td>';
             this_html += '<td class="limit_ip">' + m.ip + '</td>';
+            this_html += '<td class="limit_vlanid">' + vlan_id + '</td>';
+            this_html += '<td class="limit_vlanname">' + vlan_iface + '</td>';
             this_html += '<td class="limit_vlan">' + vlan_name + '</td>';
-            this_html += '<td class="limit_vlanid">' + vlan_iface + '</td>';
             this_html += '<td class="limit_uprate" data-value="'  + m.uprate / 1000 +  '" >' + m.uprate / 1000 + 'Mb/s</td>';
             this_html += '<td class="limit_downrate" data-value="'  + m.downrate / 1000 +  '">' + m.downrate / 1000 + 'Mb/s</td>';
             this_html += '<td >' + mode_str + '</td>';
@@ -170,6 +176,7 @@ define(function (require, b) {
                 "columns": [
                     {"orderable": false},
                     {"orderable": false},
+                    null,
                     null,
                     null,
                     null,

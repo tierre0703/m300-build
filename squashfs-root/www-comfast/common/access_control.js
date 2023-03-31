@@ -190,12 +190,15 @@ define(function (require, b) {
                         device_macaddr = device_info.mac_addr ;
 
                     d.each(vlan_config, function(vlan_index, vlan_data){
+                        if(vlan_data.port.indexOf('wan') == -1){
 
-                        var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_data.ipaddr, vlan_data.netmask);
-                        if(device_ip_num >= calc_data.ipLow && device_ip_num <= calc_data.ipHigh)
-                        {
-                            vlan_desc = vlan_data.desc == "" ? vlan_data.iface : vlan_data.desc;
+                            var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_data.ipaddr, vlan_data.netmask);
+                            if(device_ip_num >= calc_data.ipLow && device_ip_num <= calc_data.ipHigh)
+                            {
+                                vlan_desc = vlan_data.desc == "" ? vlan_data.iface : vlan_data.desc;
+                            }
                         }
+    
                     });
                     
                     d.each(lan_list, function(lan_index, lan_info){

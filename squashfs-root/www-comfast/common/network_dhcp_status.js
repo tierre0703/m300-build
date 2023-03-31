@@ -185,6 +185,7 @@ define(function (require, b) {
             var dec_ip = IpSubnetCalculator.toDecimal(client_ip);
             var vlan_name = "Default VLAN";
             var vlan_iface = "";
+            var vlan_id = 1;
 
             d.each(vlan_config, function(vlan_index, vlan_info){
                 if(vlan_info.ipaddr){
@@ -194,6 +195,7 @@ define(function (require, b) {
                         //this ip is in this vlan_config
                         vlan_name = vlan_info.desc == "" ? vlan_info.iface : vlan_info.desc;
                         vlan_iface = vlan_info.iface;
+                        vlan_id = vlan_info.id;
                         return false;
                     }
                 }
@@ -212,10 +214,9 @@ define(function (require, b) {
                 }
             });
 
-
-
-            this_html += '<td class="src_vlan_name text-left">' + vlan_name.toUpperCase() +'</td>';
+            this_html += '<td class="src_vlan_id text-left">' + vlan_id +'</td>';
             this_html += '<td class="src_vlan_iface text-left">' + vlan_iface.toUpperCase() +'</td>';
+            this_html += '<td class="src_vlan_name text-left">' + vlan_name.toUpperCase() +'</td>';
             this_html += '<td class="src_timestring" text-left >' + m.rest_time_string + '</td>';
             var status = additional_info.status || 'online';
               if(status == 'online')
@@ -280,6 +281,7 @@ define(function (require, b) {
                     {"orderable": false},
                     {"orderable": false},
                     {"orderable": true},
+                    null,
                     null,
                     null,
                     null,

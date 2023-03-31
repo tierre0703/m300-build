@@ -205,15 +205,19 @@ define(function (require, b) {
             var dec_ip = IpSubnetCalculator.toDecimal(client_ip);
             var vlan_name = "";
             var vlan_iface = "";
+            var vlan_id = 1;
 
             d.each(vlan_config, function(vlan_index, vlan_info){
-                var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_info.ipaddr, vlan_info.netmask);
-                if(dec_ip >= calc_data.ipLow && dec_ip <= calc_data.ipHigh)
-                {
-                    //this ip is in this vlan_config
-                    vlan_name = vlan_info.desc == "" ? vlan_info.iface : vlan_info.desc;
-                    vlan_iface = vlan_info.iface;
-                    return false;
+        		if(vlan_info.port.indexOf('wan') == -1){
+                    var calc_data = IpSubnetCalculator.calculateCIDRPrefix(vlan_info.ipaddr, vlan_info.netmask);
+                    if(dec_ip >= calc_data.ipLow && dec_ip <= calc_data.ipHigh)
+                    {
+                        //this ip is in this vlan_config
+                        vlan_name = vlan_info.desc == "" ? vlan_info.iface : vlan_info.desc;
+                        vlan_iface = vlan_info.iface;
+                        vlan_id = vlan_info.id;
+                        return false;
+                    }
                 }
             });
 
@@ -230,9 +234,9 @@ define(function (require, b) {
             });
            
 
-
-            this_html += '<td class="src_vlan_name text-left">' + vlan_name.toUpperCase() +'</td>';
+            this_html += '<td class="src_vlan_name text-left">' + vlan_id +'</td>';
             this_html += '<td class="src_vlan_name text-left">' + vlan_iface.toUpperCase() +'</td>';
+            this_html += '<td class="src_vlan_name text-left">' + vlan_name.toUpperCase() +'</td>';
             this_html += '<td class="src_timestring text-left" >' + (m.rest_time_string || "") + '</td>';
             this_html += '<td class="text-left">' + (m.type.toUpperCase() || "") + '</td>';
             var status = additional_info.status || 'online';
@@ -292,6 +296,7 @@ define(function (require, b) {
                 "columns": [
                     //{"orderable": false},
                     {"orderable": true},
+                    {"orderable": true},//null,
                     {"orderable": true},//null,
                     {"orderable": true},//null,
                     {"orderable": true},//null,

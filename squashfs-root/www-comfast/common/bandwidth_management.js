@@ -781,7 +781,7 @@ define(function (require, exports) {
             });
 
             d.each(vlan_wans, function(vlan_index, vlan_info){
-                if(vlan_info.iface == _wan_ifname){
+                if(vlan_info.iface == _wan_ifname && vlan_info.download != ""){
                     wan_speed = vlan_info.download;
                     return false;
                 }
@@ -1824,6 +1824,11 @@ define(function (require, exports) {
         if (swich_status == 1) {
             swich_status = 0;
             bm_info.bm_enabled = 0;
+            var arg = {};
+            arg.enable_limit = "0"
+
+            f.setMConfig('mwan_qos', arg, function (data) {
+            })
 
         } else {
             swich_status = 1;
@@ -1834,7 +1839,12 @@ define(function (require, exports) {
             arg.enable = "0";
 
             f.setMConfig('mwan_qos', arg, function (data) {
-            })
+            });
+            var arg2 = {};
+            arg2.enable_limit = "1"
+            f.setMConfig('mwan_qos', arg2, function (data) {
+            });
+
         }
         g.swich(evt, swich_status, swich_defaut);
         run_waitMe('ios');
