@@ -1,5 +1,5 @@
-var GLOBLE_TITLE = 'COMFAST';
-var copyright = 'COMFAST&reg;&nbsp;Shenzhen Four Seas Global Link Network Technology Co., Ltd.&nbsp;&copy;All rights reserved.';
+var GLOBLE_TITLE = 'SOLEUX';
+var copyright = '';
 
 var global_operate = 'Operate';
 var global_add = 'Add';
@@ -58,11 +58,11 @@ var cluster_queued_stauts = 'Waiting';
 var fw_Firewallsettings = 'Firewall Settings';
 var wlantype = 'Connection Type';
 var System_Information = 'System Information';
-var System_Tools = 'System Tools';
+var System_Tools = 'System';
 var softwareInfo = 'SW Info';
 var ledcontrol = 'Light Feature';
 var deviceInfo = 'Device Info';
-var flow_monitor = 'Traffic (KB/s)';
+var flow_monitor = 'Traffic (Mb/s)';
 var cpu_usage = 'CPU (%)';
 var wirelessUser = 'WiFi User Account';
 var FastDial = 'Fast Dial';
@@ -72,6 +72,14 @@ var FastSetting = 'Fast Setting';
 var wlPwdSetting = 'WiFi Password';
 var flow_down = 'Down';
 var flow_up = 'Up';
+
+
+var cpu_totalusage = "totalusage";
+var cpu_user = "user";
+var cpu_nice = "nice";
+var cpu_system = "system";
+var cpu_irq		= "irq";
+var cpu_softirq	= "softirq";
 
 /*extranet.html*/
 var extranet_linenum = "Line Number";
@@ -133,7 +141,7 @@ var ddos_syn = "Anti SYN Attack";
 var ddos_null = "Anti NULL Scan";
 var ddos_fin = "Anti FIN Scan";
 var ddos_xmas = "Anti Xmas Tree";
-var ddos_smurf = "Anti Sumrf";
+var ddos_smurf = "Anti Smurf";
 var ddos_ping = "Anti Ping";
 var ddos_icmp_threshold = "ICMP Rate Threshold";
 var ddos_udp_threshold = "UDP Rate Threshold";
@@ -141,7 +149,7 @@ var ddos_syn_threshold = "SYN Rate Threshold";
 /* homePage.html */
 var language_sel = 'Select Language';
 var language_xzyy = 'Language Selection';
-var language_sc = '简体中文';
+var language_sc = '????';
 var language_en = 'English';
 var home_user = 'Account:';
 var home_pwd = 'Password';
@@ -394,7 +402,10 @@ var upload_send = 'Upload';
 var upload_reset = 'Reset';
 var upload_up_failed = 'Update Firmware Failed!';
 var upload_send_file_empty = 'File name cannot be empty!';
-var upload_back_failed = 'Please select the correct configuration file！';
+var upload_back_failed = 'Please select the correct configuration file!';
+var auto_upgrade_new = 'Upgrade';
+var auto_new_version= 'Newest version';
+var online_Update = 'Online Update';
 
 /* ntp.htm */
 var ntp_header = 'Time Setting';
@@ -762,7 +773,7 @@ var ddns_disabled = 'Disabled';
 var ddns_switch = 'DDNS Enable';
 var ddns_IP_check_interval = 'Check for Changed IP Every (Minute)';
 var ddns_update_url = 'Custom Update-URL';
-var ddns_interval_check_error = 'Check for Changed IP Every (Minute) Value is not a Number！';
+var ddns_interval_check_error = 'Check for Changed IP Every (Minute) Value is not a Number!';
 
 /* util_gw.htm */
 var util_gw_ssid_hidden_alert = "if hiddenSSID is turned on; WPS2.0 will be disabled";
@@ -843,8 +854,8 @@ var util_gw_array33 = "(UTC+01:00)Amsterdam, Berlin, Berne, Rome, Stockholm, Vie
 var util_gw_array34 = "(UTC+01:00)Belgrade, Bratislava, Budapest, Ljubljana, Bragg";
 var util_gw_array35 = "(UTC+01:00)Brussels, Copenhagen, Madrid, Paris";
 var util_gw_array36 = "(UTC+01:00)Sarajevo, Skopje, Warsaw, Zagreb";
-var util_gw_array37 = "(UTC+01:00)Windhoek";
-var util_gw_array38 = "(UTC+01:00)Central African(West)";
+var util_gw_array37 = "(UTC+01:00)Central African(West)";
+var util_gw_array38 = "(UTC+02:00)Windhoek";
 var util_gw_array39 = "(UTC+02:00)Amman";
 var util_gw_array40 = "(UTC+02:00)Beirut";
 var util_gw_array41 = "(UTC+02:00)Harare, Pretoria";
@@ -902,7 +913,7 @@ var status_build_time = 'Build Time';
 var status_ssid = 'SSID';
 var status_channel_num = 'Channel';
 var status_encrypt = 'Encryption';
-var status_state = 'State';
+var status_state = 'Dashboard';
 var status_disabled = 'Disabled';
 var status_enabled = 'Enabled';
 var status_auto = 'Auto';
@@ -1076,7 +1087,7 @@ var mac_over100 = 'MAC filter rules has over 100 items, save fail!';
 var mac_format_error = 'MAC address format error!';
 /* WirelessSet */
 var ssid_is_null = 'SSID is Empty!';
-var ssid_is_too_long = 'SSID is longer than 32 bytes！';
+var ssid_is_too_long = 'SSID is longer than 32 bytes!';
 /* WirelessPwd */
 var wep_key_is_null = 'key is null!';
 var wep_key1_error = 'key1 format or length error!';
@@ -1102,7 +1113,7 @@ var time_sec = ' Seconds!';
 var ac_modeselect = 'Mode Select:';
 var ac_rep_ssid = 'Repeater to SSID:';
 var ac_rep_bssid = 'Repeater to BSSID:';
-var ac_chnnelnum = 'Repeater Channel：';
+var ac_chnnelnum = 'Repeater Channel:';
 var ac_rep_encryption = 'Repeater Encryption';
 var ac_rep_passwd = 'Repeater Pre-Key:';
 var ap_list = 'AP List';
@@ -1123,7 +1134,7 @@ var ac_status_disabled = 'Disabled';
 var ac_enable_switch = 'Enable AC Control';
 var cur_ac_ip_address = 'Current AC IP Address';
 var group_name_is_null = 'Group name is null';
-var group_name_is_too_long = 'Group name is longer than 32 bytes！';
+var group_name_is_too_long = 'Group name is longer than 32 bytes!';
 var no_config = 'No Config';
 var default_now = 'Default Now';
 
@@ -1135,7 +1146,8 @@ var index_local_network_set = 'LAN Settings';
 var index_internet_network_set = 'WAN Settings';
 var index_dhcp_network_set = 'DHCP Settings';
 var index_dhcp_sever_port = 'DHCP Service';
-var index_dhcp_client_list = 'Client List';
+var index_dhcp_client_list = 'DHCP List';
+var index_dhcp_all_client_list = 'All Client List';
 var index_dns_network_set = 'DNS Settings';
 var index_wl_set = 'Wireless Settings';
 var index_wl_basic_set = 'Basic Settings';
@@ -1162,7 +1174,7 @@ var home_about = 'The Local Situation';
 var home_runtime = 'Run Time';
 var home_wifi_links = 'WiFi Links';
 var home_memory = 'Memory';
-var home_netork_about = 'Network Status';
+var home_netork_about = 'Network Traffic Amount';
 var home_sum_up = 'Uploaded';
 var home_sum_down = 'Downloaded';
 var home_flow_monitor = 'WAN Flow Monitor(Kb/s)';
@@ -1180,7 +1192,7 @@ var previous_page = 'Previous';
 var next_page = 'Next';
 var end_page = 'End';
 var cur_page_num_start = 'Current Page\'s';
-var cur_page_num_middle = '，The Sum Page\'s ';
+var cur_page_num_middle = ',The Sum Page\'s ';
 var cur_page_num_end = '';
 var select_line_per_page = 'Please select line/page display';
 var choose_network = 'Change Network';
@@ -1200,12 +1212,12 @@ var wan_dhcp_ip = 'DHCP';
 var wan_pppoe = 'ADSL/PPPOE';
 var wan_main_dns = 'Main DNS';
 var wan_secondary_dns = 'Secondary DNS';
-var wifi_sitch = 'Wifi Enable：';
+var wifi_sitch = 'Wifi Enable:';
 var time_reboot = "Timed Restart";
 var time_reboot_switch = "Timed Restart Switch";
 
 /* ac new web */
-var ac_status = 'Status：';
+var ac_status = 'Status:';
 var ac_group_query_note = 'Group Name/SSID';
 var ac_member_query_note = 'MAC/SSID/Group Name/Comments';
 //var ac_upgrade_query_note = 'Device Model/soft version/MAC/SSID/Group Name/Comments';
@@ -1240,13 +1252,13 @@ var ac_auto_flush_60 = 'Refresh time:60 minutes';
 var ac_upload_fw_title = 'Upload Firmware';
 var ac_fw_no_upload = 'Firmware is not uploaded';
 var ac_fw_uploaded = 'Firmware has been uploaded';
-var ac_uploaded_fw_name = 'firmware name：';
-var ac_upload_fw = 'Upload Firmware：';
-var ac_re_upload_fw = 'Re uploadFirmware：';
+var ac_uploaded_fw_name = 'firmware name:';
+var ac_upload_fw = 'Upload Firmware:';
+var ac_re_upload_fw = 'Re uploadFirmware:';
 var ac_upload = 'Upload';
 var ac_upload_success = 'Upload successfully';
 var ac_upload_fail = 'Upload failed';
-var ac_not_priority = 'Current device is not AC，This operation cannot be performed！';
+var ac_not_priority = 'Current device is not AC,This operation cannot be performed!';
 var ac_device_model = 'Device';
 var ac_dev_soft_vesion = 'SW Version';
 var ac_not_upload_note = 'Firmware is not uploaded,Please upload the firmware!';
@@ -1271,7 +1283,7 @@ var dhcp_client_mac = 'Client MAC';
 var dhcp_client_lease_time = 'Remaining Time';
 var dhcp_client_arp_static_bind = 'Compatible ARP binding list to static list';
 
-/*用户详情*/
+/*????*/
 var ac_apMac = "AP MAC";
 var ac_terminalMac = "Terminal MAC";
 var ac_terminalIp = "Terminal IP";
@@ -1331,22 +1343,27 @@ var static_route_netmask_error = 'target ip and netmask conflict';
 var static_route_ip_tip = 'Destination network address repetition';
 
 /*route_router.html*/
-var index_route_route = 'Directed Route';
-var routeroute_header = 'Directed Route Settings';
+var index_route_route = 'Traffic Rule';
+var routeroute_header = 'Traffic Rule Settings';
 
 /*vlan.html*/
-var index_vlan = 'VLAN Setup';
+var index_vlan = 'LAN\'s VLANs';
+var index_vlanwans = 'WAN\'s VLANs';
 var vlan_id = 'VLAN ID';
 var vlan_name = 'VLAN Name';
 var vlan_ipaddr = 'IP Address';
 var vlan_netmask = 'Netmask';
+var vlan_gateway = 'Gateway';
 var vlan_line = 'Line';
+var vlanwan_line = 'VLAN associated to';
 var vlan_port = 'Ports';
 var vlan_desc = 'Description';
 var vlan_header = 'VLAN Setup';
 var vlan_idex = 'Please Input Leagal VLAN ID';
 var vlan_namedex = 'Please input Leagal Vlan Name, for example, vlan10';
 var vlan_ipaddrdex = 'IP address corresponding to the address is the gateway to the vlan under PC, for example : xxx.xxx.xxx.xxx';
+var vlanwan_ipaddrdex = 'Input IP for manual setup<br/>Leave blank for DHCP setup';
+var vlanwan_gateway = 'Input the gateway corresponding to the above configured IP address.<br/>Leave blank for DHCP setup.';
 var vlan_id_error = 'Vlan ID must be a number';
 var vlan_id_same_error = 'Vlan ID already exists';
 var vlan_id_ac100_error = 'Vlan ID range:6-15';
@@ -1381,13 +1398,13 @@ var arp_binded = 'Bound';
 var arp_unbind = 'Unbound';
 var arp_query_note = 'IP/MAC/Comments';
 /*vpn.html*/
-var index_vpn = 'VPN Client';
+var index_vpn = 'VPN';
 var vpn_pptp_client = 'PPTP Client';
 var vpn_pptp_username = 'Username:';
 var vpn_pptp_password = 'Password';
 var vpn_pptp_server = 'Server/IP';
 var vpn_pptp_server_is_null = 'Server/IP is Empty';
-var vpn_switch = 'PPTP Switch';
+var vpn_switch = 'PPTP Status';
 var vpn_dns_null = 'DNS Cannot be Empty';
 var vpn_same_name = 'The same user name already exists';
 
@@ -1398,7 +1415,7 @@ var wlroam_roam = 'WiFi Roaming:';
 var wlroam_linkquality_period = 'Signal Quality Test Period:';
 var wlroam_reconnect_period = 'Reconnect Period:';
 var wlroam_reconnect_threshold = 'Signal Reconnect Threshold:';
-var wlroam_reconnect_threshold_sugest_note = '(Recommended setting range:70-90）';
+var wlroam_reconnect_threshold_sugest_note = '(Recommended setting range:70-90)';
 var wlroam_check_period_note = 'Signal Quality Test Period must >= 1';
 var wlroam_reconnect_period_note = 'Reconnect Period >= Signal Quality Test Period';
 var wlroam_reconnect_threshold_note = 'Signal Reconnect Threshold must > 60';
@@ -1450,10 +1467,10 @@ var mwan_isp_comment_contain_chinese = 'ISP comment include chinese,please enter
 var mwan_policy_line = 'Line';
 var mwan_policy_ip = 'IP';
 var mwan_policy_isp = 'ISP';
-var mwan_isp_telecom = '中国电信';
-var mwan_isp_unicom = '中国联通';
-var mwan_isp_mobile = '中国移动';
-var mwan_isp_educate = '中国教育';
+var mwan_isp_telecom = '????';
+var mwan_isp_unicom = '????';
+var mwan_isp_mobile = '????';
+var mwan_isp_educate = '????';
 var mwan_isp_other = 'choose isp';
 var mwan_policy_enable = 'Multiline route switch';
 var mwan_policy_error1 = 'Please choose line';
@@ -1510,9 +1527,9 @@ var wifidog_whitemac = 'MAC Whitelist';
 var wifidog_whiteweb = 'Web Site Whitelist';
 var wifidog_whitemac_note = 'Add MAC address does not require authentication, multiple MAC addresses with a comma ";" please do not enter the space partition, for example, 00:E0:6F:29:46:46;00:E0:6F:29:46:47';
 var wifidog_whiteweb_note = 'Add the site does not require authentication, multiple sites ";" use comma separated, do not enter the space for example, qq.com;sina.com';
-var wifidog_whitemac_fmt_errnote = 'MAC Whitelist Format Error！';
-var wifidog_whiteweb_fmt_errnote = 'Web Site Whitelist Format Error！';
-var wifidog_macaddr_fmt_errnote = 'MAC Address Format Error！';
+var wifidog_whitemac_fmt_errnote = 'MAC Whitelist Format Error!';
+var wifidog_whiteweb_fmt_errnote = 'Web Site Whitelist Format Error!';
+var wifidog_macaddr_fmt_errnote = 'MAC Address Format Error!';
 
 var home_hw_status = 'Hardware Status';
 var home_net_status = 'Network Interface';
@@ -1531,7 +1548,7 @@ var lan2wan = "LAN port to WAN port";
 var pptp_client = 'PPTP Client';
 var l2tp_client = 'L2TP Client';
 
-var l2tp_switch = 'L2TP Switch';
+var l2tp_switch = 'L2TP Status';
 var policy_add = 'Join miltiline route';
 var policylineenable = 'join';
 var policylinedisable = 'not join';
@@ -1539,7 +1556,7 @@ var policylinedisable = 'not join';
 var vpn_server = 'VPN Server';
 var pptpd_server = 'PPTP Server';
 var pptp_user = 'PPTP User';
-var pptpd_server_switch = 'PPTP server switch';
+var pptpd_server_switch = 'PPTP server status';
 var pptpd_server_switch_enable = 'enable';
 var pptpd_server_switch_disable = 'disable';
 var pptpd_server_localip = 'ServerIP';
@@ -1574,13 +1591,13 @@ var blue_d = 'Gradient';
 var blue_l = 'Blue';
 var blue_w = 'White/Blue';
 var add_status = "Add widget";
-var status_list = "Status list";
-var intertface_status = "Intertface Status";
+var status_list = "Dashboard";
+var intertface_status = "Interface Status";
 var rate_resources = "Utilization";
 var name_information = "Information";
 var information = "information";
 var information_msg = "Message";
-var intertface_set = "Intertface Designate";
+var intertface_set = "Interface Designate";
 var mwanset = "Balance";
 var devices_crtl = "Devices control";
 var portal_set = "Authentication";
@@ -1609,7 +1626,7 @@ var macex = "MAC Ex. xx:xx:xx:xx:xx:xx";
 var urlex = "URL Ex: http://xxxxxxxx";
 var edit_title = "Edit";
 var edit = "Edit";
-var setting_wait = "Saving，Please Wait";
+var setting_wait = "Saving,Please Wait";
 var setting_seconds = "Seconds";
 var ippool_to = "to";
 var msg_list = "Messages List";
@@ -1733,7 +1750,7 @@ var upload_format_error = 'upload is not a number!';
 var download_format_error = 'download is not a number!';
 
 var main_dns_format_error = 'main DNS format error!';
-var backup_dns_format_error = 'backup DNS　format error!';
+var backup_dns_format_error = 'backup DNS format error!';
 
 var portal_page = 'Local Authentication Page Module';
 var portal_ad1 = 'Advertise One';
@@ -1768,11 +1785,11 @@ var pptp_username_is_null = 'username is null!';
 var pptp_password_is_null = 'password is null!';
 var pptpd_mtu_large_then_1500 = 'MTU cannot large then 1500!';
 var pptp_user_setup = 'PPTP user settings';
-var pptpd_username_is_null = 'username is null！';
-var pptpd_password_is_null = 'password is null！';
+var pptpd_username_is_null = 'username is null!';
+var pptpd_password_is_null = 'password is null!';
 
-var ipfilter_startip_format_error = 'start IP is null or format error！';
-var ipfilter_endip_format_error = 'end IP is null or format error！';
+var ipfilter_startip_format_error = 'start IP is null or format error!';
+var ipfilter_endip_format_error = 'end IP is null or format error!';
 
 var arp_bind_setup = 'ARP Bind Settings';
 var timeserver_is_null = 'NTP Server Field Empty!';
@@ -1813,12 +1830,12 @@ var local_subnet_conflict_tip4 = 'Network conflict with &lt;';
 var local_subnet_conflict_tip2 = '&gt;';
 var radio_24g_name = '2.4GHZ';
 var radio_58g_name = '5.8GHZ';
-var ssid_name_is_null = ' SSID Cannot be Empty！';
-var passwd_is_null = ' Password Cannot be Empty！';
+var ssid_name_is_null = ' SSID Cannot be Empty!';
+var passwd_is_null = ' Password Cannot be Empty!';
 var ssid_lenth_error = ' SSID Less Than 32 Characters';
 var passwd_lenth_error = ' Password must be at least 8 characters but less than 32 characters.';
 
-var pageon_next_version = "Coming soon！";
+var pageon_next_version = "Coming soon!";
 
 var os_info = "OS";
 
@@ -1826,7 +1843,8 @@ var not_a_correct_num = "is not a correct number!";
 var second_tips = "unit:second";
 var minute_tips = "unit:minute";
 var dbm_tips = "unit:dbm";
-var user_sum_num = "Client Connections";
+//var user_sum_num = "Client Connections";
+var user_sum_num = "Connected";
 
 var html_title = "HTML Title";
 var ad_title = "Advertisement Title";
@@ -1868,7 +1886,7 @@ var wire_days_select = "Please select the Days";
 var wire_timeslot_select = "Please select the Time slot";
 var wire_time_slot = "Time slot";
 var forbid_modify = "Static";
-var wan_link_mode = "Static IP, DHCP or PPPoE";
+var wan_link_mode = "Static IP or DHCP";
 var netmask_tiptext = "Enter Subnet Mask Info";
 var gateway_tiptext = "Enter Gateway Info";
 var ac_mode = "Current AC Mode";
@@ -1876,11 +1894,11 @@ var cascading_ac = "Cascading AC";
 var cascading_ap = "Cascading AP";
 var branch_ac = "Branch AC";
 var branch_ap = "Branch AP";
-var dhcp_eg = "Ex：";
+var dhcp_eg = "Ex:";
 var dhcp_last_tip = "(Fill the last bit)";
-var dhcp_client_start_tips = "Ex：192.168.10.XXX (Enter Last Value)";
+var dhcp_client_start_tips = "Ex:192.168.10.XXX (Enter Last Value)";
 var dhcp_client_limit_tips = "Max Number of IPs to Allocate (1-32768)";
-var dhcp_client_domaint_tips = "DHCP Domain (Ex： COMFAST)";
+var dhcp_client_domaint_tips = "DHCP Domain (Ex: SOLEUX)";
 var groupname_max_tips = "ac groupname limit 15 characters";
 var ssid_max_tips = "SSID limit 32 characters";
 var wireless_passwd_tips = "wireless password limit 32 characters";
@@ -1921,7 +1939,7 @@ var groupname_exist = "already existed!";
 var ipfilter_list = "IP address range";
 var setting_error = "Setting error";
 
-var tips_ntp_server = "e.g ：0.openwrt.pool.ntp.org";
+var tips_ntp_server = "e.g :0.openwrt.pool.ntp.org";
 var log_date = "Date";
 var log_level = "Level";
 var log_context = "Log";
@@ -1957,10 +1975,11 @@ var guest_ssid = "Guest SSID";
 var upload_config_file_fail = "Upload Failed. Please Choose Correct Config File.";
 var mtu_tips = " Range:128~1500 (Optional)";
 
-var traffic_upload_rate = "Upload Rate(Mb/s)";
-var traffic_download_rate = "Download Rate(Mb/s)";
-var traffic_upload_total = "Upload Bytes";
-var traffic_download_total = "Download Bytes";
+//tierre 2020/10/27
+var traffic_upload_rate = "Upload Rate";
+var traffic_download_rate = "Download Rate";
+var traffic_upload_total = "Total Upload";
+var traffic_download_total = "Total Download";
 var traffic_ipaddr = "IP";
 var traffic_network_stat = "LocalNet Monitor";
 
@@ -1971,11 +1990,11 @@ var exiprange = "IP or IP Range";
 var share_mode = "Shared";
 var vip_mode = "Exclusive";
 var ip_limit_switch = "IP Limit Switch";
-var exiplimit = "Ex:100, Limit 100(KB/s)";
+var exiplimit = "Ex:100, Limit 100(Mbps)";
 var error_ip_not_correct = "Format Incorrect!";
 var exMbps = " (Mbps)";
 var up_time = "Online Time";
-var limit_host = "Terminal Speed Limit ";
+var limit_host = "Terminal Limit Configuration ";
 
 /* users_manage.html */
 var current_device = 'Current Connection Device';
@@ -2089,4 +2108,91 @@ var radius_hb_time = 'Update cycle';
 
 var radius_template_upload = "Template";
 var radius_template_file = "Template file";
+
+/*added */
+var page_status = "Status";
+var bandwidth_management = "Bandwidth Management";
+var user_sum_num_clients = "Clients";
+var user_sum_num_client = "Client";
+
+var bandwidth_management_switch = "Enable Bandwidth Management";
+var create_rule = "Create Rule";
+var internet_speed_test = "Internet Speed Test:";
+var manual_config = "Manual Config";
+var str_auto_test = "Auto Bandwidth Test";
+var select_percentage = "Select Percentage";
+var select_network = "<p class='h6'>Select Network</p>";
+var Mbps = "Mbps";
+var select_allocated_to = "Bandwidth Allocation";
+var perform_test = "Perform Manual Test";
+
+var need_change = "Apply for the changes to take effect!";
+var please_waiting = 'Please wait...';
+var vlan_dns = "DNS";
+var vlan_dns2 = "Second DNS";
+var vlan_dns_tip = "Enter DNS Adress: xxx.xxx.xxx.xxx";
+var vlan_dns_tip2 = "Enter Secondary DNS Adress: xxx.xxx.xxx.xxx";
+var vlan_intervlan = "InterVlan";
+var vlan_intervlan_tip = "Enable or Disable InterVlan Communication";
+var wan_speed_panel_header = "- utilization (Bandwidth available: ";
+var wan_speed_panel_header_suffix = "Mb/s)";
+var wan_speed_Download = "Download";
+var wan_speed_Upload = "Upload";
+var client_connections = "Connections";
+var Descriptions = "Description";
+var auto_test_schedule = "Auto Test Schedule:";
+var last_test_performed_at = "Last Test Performed at: ";
+var access_control = "Access Control";
+var section_name = "Section Name";
+var add_device = "Add Device";
+var add_section = "Add Section";
+var ip_address = "IP Address";
+var ip_address_corresponding_to = "IP addres corresponding to the device to be controlled";
+var description = "Description";
+var maximum_32_characters = "Maximum 32 characters";
+var status_allowed = "Allow";
+var status_blocked = "Block";
+var pls_input_device_ip = "Please Input Device IP!";
+var pls_input_device_description = "Please Input Device Description!";
+var device_description = "Description";
+var device_ip = "IP Address";
+var device_vlan_ifname = "VLAN Name";
+var device_status = "Control";
+var confirm_delete_section = "This Section Panel will be permanently deleted. ";
+var duplicate_section_exists = "Duplicate Section Name Exists!";
+var duplicated_ip_exists = "Duplicated IP Exists!";
+var ip_not_found = "Target IP not found";
+var device_macaddr = "MAC Address";
+
+var bm_already_enabled = "Not available when Bandwidth Management enabled";
+
+var system_info = "System Info";
 /*auth all*/
+
+var page_status = "Status";
+var wireless_state = "Wireless";
+var hide_ssid = "Hide SSID";
+var please_waiting = 'Please wait...';
+
+var aps_only = "AP's only";
+var aps_with_clients = "AP's with clients";
+var wifi_clients = "Wi-Fi clients";
+var index_ac_accesspoint_control = "Access Points";
+var _24Hz = "2.4GHz";
+var _58Hz = "5.8GHz";
+var ap_ipaddr = "IP Address";
+var need_change = "Apply for the changes to take effect!";
+var index_ac_ap_clients = "WiFi Clients";
+
+
+var cpu_totalusage = "totalusage";
+var cpu_user = "user";
+var cpu_nice = "nice";
+var cpu_system = "system";
+var cpu_irq		= "irq";
+var cpu_softirq	= "softirq";
+
+var ap_offline = "AP Offline";
+var registered_group = "Registered Groups";
+
+var redirect_rule = "Static Rule";
