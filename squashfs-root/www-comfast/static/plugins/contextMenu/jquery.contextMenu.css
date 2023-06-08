@@ -1,4 +1,4 @@
-﻿.b-m-mpanel { background: #F0F0F0 url(images/menu_bg.gif) left repeat-y; border: 1px solid #718BB7; padding: 2px 0; position: absolute; z-index: 99997; left: 0px; top: 0px; }
+.b-m-mpanel { background: #F0F0F0 url(images/menu_bg.gif) left repeat-y; border: 1px solid #718BB7; padding: 2px 0; position: absolute; z-index: 99997; left: 0px; top: 0px; }
 .b-m-split { height: 6px; background: url(images/m_splitLine.gif) center repeat-x; font-size: 0px; margin: 0 2px; }
 
 .b-m-item, .b-m-idisable { padding: 4px 2px; margin: 0 2px 0 3px; cursor: normal; line-height: 100%; }

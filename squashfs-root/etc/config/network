@@ -77,4 +77,3 @@ config interface 'wan4'
 	option macaddr '40:a5:ef:ef:9c:34'
 	option defmacaddr '40:a5:ef:ef:9c:34'
 
-
