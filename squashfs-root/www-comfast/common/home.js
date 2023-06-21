@@ -944,7 +944,6 @@ define(function (require, exports) {
             
             
             
-            if(online_status == true) online_wan_num++;
             
             var t_num = m.wan_ifname.substr(3);
             wan_num = t_num == "" ? 1 : parseInt(t_num) + 1;
@@ -970,11 +969,14 @@ define(function (require, exports) {
 						return false;
 					}
 			});
+
+            var bFoundWan = false;
 			
 
             d.each(wan_full_list, function(wan_index, wan_data){
                 if(wan_data[0].iface == wan_ifname)
                 {
+                    bFoundWan = true;
                     var proto = wan_data[0].proto;
                     var propto_model =  wan_data[0][proto];
                     wan_data[0].upload = wan_data[0].upload == "" ? 1000 : wan_data[0].upload;
@@ -986,6 +988,9 @@ define(function (require, exports) {
                 }
                 
             });
+            if (bFoundWan == false) online_status = false;
+
+            if(online_status == true) online_wan_num++;
 
 
 

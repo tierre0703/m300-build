@@ -139,17 +139,41 @@ define(function (require, b) {
 
         if (proto != '') {
             d("#ipaddr").val(proto_model.ipaddr || '');
-            d("#netmask").val(proto_model.netmask || "255.255.255.0");
-            d("#gateway").val(proto_model.gateway || '');
+            if(proto === 'dhcp'){
+                d("#netmask").attr('readonly','readonly');
+                d("#gateway").attr('readonly','readonly');
 
-            if (proto_model.dns) {
-                dnsarry = proto_model.dns.split(' ');
-                d("#dns_main").val(dnsarry[0] || '');
-                d("#dns_backup").val(dnsarry[1] || '');
-            } else {
-                d("#dns_main").val('');
-                d("#dns_backup").val('');
+                d("#dns_main").attr('readonly','readonly');
+                d("#dns_backup").attr('readonly','readonly');
+
+                d("#netmask").val(wanlists_info[list_num][wan_num].wan_netmask|| "255.255.255.0");
+                d("#gateway").val(wanlists_info[list_num][wan_num].wan_gateway || '');
+
+                
+                d("#dns_main").val(wanlists_info[list_num][wan_num].wan_dns1);
+                d("#dns_backup").val(wanlists_info[list_num][wan_num].wan_dns2);
+
+            }else{
+                d("#netmask").removeAttr('readonly');
+                d("#gateway").removeAttr('readonly');
+
+                d("#dns_main").removeAttr('readonly');
+                d("#dns_backup").removeAttr('readonly');
+
+                d("#netmask").val(proto_model.netmask || "255.255.255.0");
+                d("#gateway").val(proto_model.gateway || '');
+
+                if (proto_model.dns) {
+                    dnsarry = proto_model.dns.split(' ');
+                    d("#dns_main").val(dnsarry[0] || '');
+                    d("#dns_backup").val(dnsarry[1] || '');
+                } else {
+                    d("#dns_main").val('');
+                    d("#dns_backup").val('');
+                }
             }
+
+            
 
             d("#dhcp_hostname").val(proto_model.hostname || "");
 
@@ -225,6 +249,12 @@ define(function (require, b) {
             d("#static_ip_div").removeClass('hide');
             d("#pppoe_div").addClass('hide');
             d("#dhcp_div").addClass('hide');
+            d("#netmask").removeAttr('readonly');
+            d("#gateway").removeAttr('readonly');
+
+            d("#dns_main").removeAttr('readonly');
+            d("#dns_backup").removeAttr('readonly');
+
         } else if (proto_value == "pppoe") {
             d("#static_div").addClass('hide');
             d("#pppoe_div").removeClass('hide');
@@ -235,6 +265,13 @@ define(function (require, b) {
             d("#static_ip_div").addClass('hide');
             d("#pppoe_div").addClass('hide');
             d("#dhcp_div").removeClass('hide');
+
+            d("#netmask").attr('readonly','readonly');
+            d("#gateway").attr('readonly','readonly');
+
+            d("#dns_main").attr('readonly','readonly');
+            d("#dns_backup").attr('readonly','readonly');
+
         }
     }
 
