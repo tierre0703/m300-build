@@ -140,7 +140,7 @@ define(function (require, b) {
         if (proto != '') {
             d("#ipaddr").val(proto_model.ipaddr || '');
             if(proto === 'dhcp'){
-                d("#netmask").attr('readonly','readonly');
+                d("#netmask").attr('disabled', true);
                 d("#gateway").attr('readonly','readonly');
 
                 d("#dns_main").attr('readonly','readonly');
@@ -154,7 +154,7 @@ define(function (require, b) {
                 d("#dns_backup").val(wanlists_info[list_num][wan_num].wan_dns2);
 
             }else{
-                d("#netmask").removeAttr('readonly');
+                d("#netmask").attr('disabled', false);;
                 d("#gateway").removeAttr('readonly');
 
                 d("#dns_main").removeAttr('readonly');
@@ -249,7 +249,7 @@ define(function (require, b) {
             d("#static_ip_div").removeClass('hide');
             d("#pppoe_div").addClass('hide');
             d("#dhcp_div").addClass('hide');
-            d("#netmask").removeAttr('readonly');
+            d("#netmask").attr('disabled', false);
             d("#gateway").removeAttr('readonly');
 
             d("#dns_main").removeAttr('readonly');
@@ -266,7 +266,7 @@ define(function (require, b) {
             d("#pppoe_div").addClass('hide');
             d("#dhcp_div").removeClass('hide');
 
-            d("#netmask").attr('readonly','readonly');
+            d("#netmask").attr('disabled', true);
             d("#gateway").attr('readonly','readonly');
 
             d("#dns_main").attr('readonly','readonly');
