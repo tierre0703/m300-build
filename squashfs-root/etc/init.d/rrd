@@ -10,10 +10,8 @@ start()
 
 		cmd=`cat /etc/crontabs/root | grep loadrrd`
 		if [ -n "$cmd" ];then
-			/etc/init.d/cron restart
-			exit 0
+			sed -i "/loadrrd/d" "/etc/crontabs/root"
 		fi
 	fi
-	echo "*/1 * * * * /etc/rrd/loadrrd start" >> /etc/crontabs/root
 	/etc/init.d/cron restart
 }

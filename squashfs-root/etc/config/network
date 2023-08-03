@@ -22,10 +22,6 @@ config interface 'wan'
 	option defmetric '10'
 	option macaddr '40:a5:ef:ef:9c:30'
 
-config interface 'wan6'
-	option ifname 'eth0'
-	option proto 'dhcpv6'
-
 config globals 'globals'
 	option ula_prefix 'fdd4:b49d:f34e::/48'
 
